@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lunnovate | Make Tech Native - Empowering Africa's Digital Future</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="lunnovate.png">
+    <!-- Google Fonts - Poppins (Body) & Orbitron (Headings/Logo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />
+    
+    <style>
+        /* Custom Tailwind Configuration */
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+        }
+        h1, h2, h3 {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .cta-btn-glow {
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        .cta-btn-glow:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+        .team-carousel {
+            display: flex;
+            overflow-x: scroll; 
+            -webkit-overflow-scrolling: touch; 
+        }
+        .team-card {
+            min-width: 250px; 
+            flex-shrink: 0; 
+        }
+        /* Hide scrollbar for aesthetics */
+        .team-carousel::-webkit-scrollbar {
+            display: none;
+        }
+        .team-carousel {
+            -ms-overflow-style: none;  
+            scrollbar-width: none;  
+        }
+        
+        /* --- Canvas Styles --- */
+        #heroBubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Below content */
+            opacity: 0.15; /* Subtle background */
+        }
+        #contactGlow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.25; /* Slightly more visible glow */
+        }
+
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'lun-dark': '#0a0a0a',
+                        'lun-card': '#1c1c1c',
+                        'lun-highlight': '#00FFFF', /* Cyan */
+                        'lun-accent': '#FFD200', /* Yellow */
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-black bg-opacity-90 shadow-2xl shadow-lun-highlight/10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6 lg:px-8">
+            <a href="#home" class="flex items-center gap-2 text-2xl font-bold font-heading">
+                <!-- SVG Logo Placeholder -->
+                <img src="lunnovate.png" class="w-8 h-8" alt="icon" />Lunnovate
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 items-center text-lg font-medium">
+                <a href="#about" class="hover:text-lun-highlight transition-colors">About</a>
+                <a href="#programs" class="hover:text-lun-highlight transition-colors">Programs</a>
+                <a href="#impact" class="hover:text-lun-highlight transition-colors">Impact</a>
+                <a href="#contact" class="px-5 py-2 text-lun-dark bg-lun-highlight rounded-full font-semibold hover:bg-opacity-80 transition-all cta-btn-glow">Get Involved</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="hamburger" class="md:hidden text-lun-highlight focus:outline-none p-2 rounded-lg hover:bg-lun-card" aria-label="Toggle navigation">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu & Overlay -->
+    <div id="overlay" class="fixed inset-0 bg-black/70 z-40 hidden md:hidden" onclick="toggleMenu()"></div>
+    <div id="mobileMenu" class="fixed top-0 right-0 w-64 h-full bg-lun-card transform translate-x-full transition-transform duration-300 z-50 shadow-xl md:hidden">
+        <div class="flex justify-end p-4">
+            <button onclick="toggleMenu()" class="text-lun-highlight hover:text-white">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+        </div>
+        <ul class="flex flex-col gap-6 p-6 text-xl">
+            <li><a href="#home" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">Home</a></li>
+            <li><a href="#about" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">About</a></li>
+            <li><a href="#programs" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">Programs</a></li>
+            <li><a href="#impact" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">Impact</a></li>
+            <li><a href="#contact" onclick="toggleMenu()" class="block mt-4 px-4 py-2 text-lun-dark bg-lun-highlight rounded-lg font-semibold cta-btn-glow">Join Us</a></li>
+        </ul>
+    </div>
+
+    <!-- 1. Hero Section -->
+    <section id="home" class="relative min-h-[85vh] flex flex-col items-center justify-center text-center pt-24 pb-12 overflow-hidden px-4">
+        <!-- Canvas for Subtle Bubbles Effect -->
+        <canvas id="heroBubbles"></canvas>
+        <div class="relative z-10">
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black mb-4 leading-tight">
+                MAKE TECH <span class="text-lun-highlight">NATIVE.</span>
+            </h1>
+            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mb-8">
+                Empowering young Africans to confidently shape and lead in their digital future.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a href="#programs" class="cta-btn-glow px-8 py-3 bg-lun-highlight text-lun-dark font-bold rounded-full shadow-lg hover:bg-opacity-90 transition-all">
+                    Join Bootcamp
+                </a>
+                <a href="#contact" class="px-8 py-3 border-2 border-lun-highlight text-lun-highlight font-bold rounded-full hover:bg-lun-highlight hover:text-lun-dark transition-all">
+                    Partner With Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About Us & Objectives Section -->
+    <section id="about" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold mb-4 text-lun-highlight">Who We Are</h2>
+        <p class="text-lg text-gray-400 max-w-4xl mx-auto mb-12">
+            Lunnovate is a youth-led innovation network committed to bridging the gap between young Africans and emerging technologies. Rooted in Nigeria, we equip students with the tools and mindset to not just use technology but create it.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-12">
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent">
+                <h3 class="text-2xl font-bold mb-3 text-lun-accent">Our Vision</h3>
+                <p class="text-gray-400">A future where every young African can confidently shape and lead in the digital world, becoming producers, not just consumers.</p>
+            </div>
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent">
+                <h3 class="text-2xl font-bold mb-3 text-lun-accent">Our Mission</h3>
+                <p class="text-gray-400">To localize tech education, foster innovation, and inspire leadership through relatable, accessible, and impactful learning experiences.</p>
+            </div>
+        </div>
+
+        <div class="mt-16 pt-12 border-t border-gray-800">
+            <h3 class="text-3xl font-bold mb-6 text-lun-highlight">Core Objectives</h3>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Early exposure to AI and digital tools</div>
+                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Promote Tech-powered problem-solving</div>
+                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Integrate Indigenous language learning</div>
+                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Establish School-based innovation communities</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Key Programs -->
+    <section id="programs" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Key Programs</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-b-4 border-lun-highlight transition duration-300 hover:shadow-lun-highlight/30">
+                <h3 class="text-2xl font-bold mb-2 text-lun-highlight">#MakeTechNative Movement</h3>
+                <p class="text-gray-400">Our flagship initiative: Tech workshops that bring AI and digital skills to secondary schools in culturally relatable ways.</p>
+            </div>
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-b-4 border-lun-highlight transition duration-300 hover:shadow-lun-highlight/30">
+                <h3 class="text-2xl font-bold mb-2 text-lun-highlight">AI Awareness Workshops</h3>
+                <p class="text-gray-400">Hands-on sessions teaching students the core mechanics of AI and positioning them as active participants in its future development.</p>
+            </div>
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-b-4 border-lun-highlight transition duration-300 hover:shadow-lun-highlight/30">
+                <h3 class="text-2xl font-bold mb-2 text-lun-highlight">EcoBridge (Hausa AI Chatbot)</h3>
+                <p class="text-gray-400">Developing AI-powered tools that facilitate learning and knowledge access in native languages, starting with Hausa.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Impact & Future Goals -->
+    <section id="impact" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-lun-dark">
+        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Impact & Vision</h2>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <!-- Current Impact -->
+            <div class="bg-lun-card p-8 rounded-2xl shadow-2xl border border-gray-700">
+                <h3 class="text-3xl font-bold mb-6 text-lun-accent">Milestones Achieved</h3>
+                <ul class="space-y-4 text-gray-300 text-lg list-disc pl-5">
+                    <li>Successfully hosted workshops at schools in Kano.</li>
+                    <li>Trained 1000+ of students in AI basics and critical digital skills.</li>
+                    <li>Received overwhelmingly positive feedback from teachers and students alike.</li>
+                </ul>
+            </div>
+            
+            <!-- Future Goals -->
+            <div class="bg-lun-card p-8 rounded-2xl shadow-2xl border border-gray-700">
+                <h3 class="text-3xl font-bold mb-6 text-lun-highlight">Future Goals</h3>
+                <ul class="space-y-4 text-gray-300 text-lg list-disc pl-5">
+                    <li>Scale the #MakeTechNative Movement nationwide.</li>
+                    <li>Launch structured student–mentor programs.</li>
+                    <li>Build a digital learning hub for continuous growth.</li>
+                    <li>Expand the EcoBridge project to include more native African languages.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Projects Section (NEW) -->
+    <section id="projects" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Our Impact in Action</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Project Card 1: Localized Learning Platform -->
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent transition duration-300 hover:shadow-lun-accent/30">
+                <h3 class="text-2xl font-bold mb-2 text-lun-accent">EcoBridge: Hausa LLM</h3>
+                <p class="text-gray-400 mb-4 text-sm">A foundational large language model trained to support educational content and critical thinking in the Hausa language, bridging the digital language divide.</p>
+                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-lun-highlight/20 text-lun-highlight">AI/ML</span>
+            </div>
+            
+            <!-- Project Card 2: Robotics Challenge -->
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent transition duration-300 hover:shadow-lun-accent/30">
+                <h3 class="text-2xl font-bold mb-2 text-lun-accent">School Innovation Hubs</h3>
+                <p class="text-gray-400 mb-4 text-sm">Establishing dedicated, self-sustaining tech clubs in secondary schools focused on local problem-solving using open-source hardware and software.</p>
+                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-lun-highlight/20 text-lun-highlight">Community & IoT</span>
+            </div>
+
+            <!-- Project Card 3: Digital Literacy Initiative -->
+            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent transition duration-300 hover:shadow-lun-accent/30">
+                <h3 class="text-2xl font-bold mb-2 text-lun-accent">Project Digital Shield</h3>
+                <p class="text-gray-400 mb-4 text-sm">A mobile workshop series dedicated to teaching essential digital security, critical media consumption, and cyber ethics to high school students.</p>
+                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-lun-highlight/20 text-lun-highlight">Cyber Security</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Team Section (Optimized Carousel) -->
+    <section id="team" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Meet the Visionaries</h2>
+        
+        <!-- Optimized Team Carousel Container -->
+        <div class="team-carousel pb-6 space-x-6 flex flex-nowrap" id="teamContainer">
+            <!-- Content generated by JS -->
+        </div>
+    </section>
+
+    <!-- 7. Resources & Contact Section -->
+    <section id="contact" class="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center overflow-hidden">
+        <!-- Canvas for Lighting/Glow Effect -->
+        <canvas id="contactGlow"></canvas>
+        <div class="relative z-10">
+            <h2 class="text-4xl font-extrabold mb-4 text-lun-accent">Ready to Create the Future?</h2>
+            <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-10">Join our movement, support our mission, or start a collaboration.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                <a class="cta-btn-glow px-8 py-3 bg-lun-highlight text-lun-dark font-bold rounded-full shadow-lg hover:bg-opacity-90 transition-all" onclick="payWithPaystack('foundation')">
+                    Support our mission
+                </a>
+                <a href="https://wa.me/2348084654408" class="px-8 py-3 border-2 border-lun-accent text-lun-accent font-bold rounded-full hover:bg-lun-accent hover:text-lun-dark transition-all">
+                   Join our movement
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t-4 border-lun-highlight py-8 px-4 text-center">
+        <p class="text-sm text-gray-500">&copy; 2025 Lunnovate. All Rights Reserved. | Make Tech Native Movement</p>
+    </footer>
+
+    <!-- JavaScript -->
+     <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script>
+        // --- Mobile Menu Toggle ---
+        const mobileMenu = document.getElementById('mobileMenu');
+        const overlay = document.getElementById('overlay');
+        const hamburger = document.getElementById('hamburger');
+
+        function toggleMenu() {
+            const isActive = mobileMenu.classList.contains('translate-x-full');
+            if (isActive) {
+                mobileMenu.classList.remove('translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                mobileMenu.classList.add('translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+        hamburger.addEventListener('click', toggleMenu);
+        
+        // --- Team Carousel (Infinite Auto-Scroll) ---
+        const teamData = [
+            { initials: 'ISB', name: 'Ibrahim Sanusi Bayero', role: 'Founder & Chief Technology Officer (CTO)', color: 'bg-red-500' },
+            { initials: 'TYH', name: 'Tijjani Yusuf Hassan', role: 'Marketing & Business Dev', color: 'bg-green-500' },
+            { initials: 'MA', name: 'Muhammad Aminu', role: ' Co-founder & Lead AI Engineer', color: 'bg-blue-500' },
+            { initials: 'RB', name: 'Ridwan Bello', role: 'Project Manager', color: 'bg-yellow-500' },
+            { initials: 'AA', name: 'Adeneye Abdulganiyu', role: 'Community Engagement Lead', color: 'bg-purple-500' },
+            { initials: 'SA', name: 'Safwan Abdullahi', role: 'Finance & Admin Officer', color: 'bg-red-500' },
+            { initials: 'ASM', name: 'Adamu Sulaiman Muhammed', role: 'Quality Assurance (QA)', color: 'bg-green-500' },
+            { initials: 'MMU', name: 'Muhammad Muktar Usman', role: 'Creative Director', color: 'bg-blue-500' },
+            { initials: 'AA', name: 'Abdallah Abdallah', role: 'Curriculum Designer', color: 'bg-yellow-500' },
+            { initials: 'M', name: 'Muhammad', role: 'Research & Impact Officer', color: 'bg-purple-500' },
+            { initials: 'AI', name: 'Aliyu Ilu', role: 'Communications & Media Lead', color: 'bg-red-500' },
+            { initials: 'ASB', name: 'Abubakar Sadiq Bilya', role: 'Operations & Logistics Officer', color: 'bg-green-500' }
+        ];
+
+        const teamContainer = document.getElementById('teamContainer');
+        
+        // Function to create a placeholder SVG with initials
+        function createAvatar(initials, color) {
+            return `<div class="w-24 h-24 ${color} rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-lun-highlight/50">
+                        <span class="text-3xl font-bold font-heading text-white">${initials}</span>
+                    </div>`;
+        }
+
+        const cardHtml = teamData.map(m => `
+            <div class='team-card bg-lun-card p-6 rounded-xl shadow-lg border border-gray-800 transition duration-300 hover:border-lun-highlight/50'>
+                ${createAvatar(m.initials, m.color)}
+                <h3 class='text-xl font-bold text-lun-highlight mb-1'>${m.name}</h3>
+                <p class='text-gray-400 text-sm'>${m.role}</p>
+            </div>
+        `).join('');
+
+        // Duplicate the content to enable seamless looping
+        teamContainer.innerHTML = cardHtml + cardHtml;
+
+        let scrollSpeed = 0.5; // Pixels per frame
+        let currentScroll = 0;
+        let isHovering = false;
+        let scrollLoopId;
+        
+        // Auto-scroll function
+        function scrollLoop() {
+            if (!isHovering) {
+                currentScroll += scrollSpeed;
+                
+                // When the scroll position passes the original set of cards, reset it to 0
+                if (currentScroll >= teamContainer.scrollWidth / 2) {
+                    currentScroll = 0;
+                }
+                
+                teamContainer.scrollLeft = currentScroll;
+            }
+            scrollLoopId = requestAnimationFrame(scrollLoop);
+        }
+        
+        // Pause auto-scrolling when the user interacts (manual scroll or hover)
+        teamContainer.addEventListener('mouseenter', () => { isHovering = true; });
+        teamContainer.addEventListener('mouseleave', () => { isHovering = false; });
+        teamContainer.addEventListener('touchstart', () => { isHovering = true; });
+        teamContainer.addEventListener('touchend', () => { isHovering = false; });
+        
+        
+        // --- 1. Hero Section Bubbles Effect ---
+        const heroCanvas = document.getElementById('heroBubbles');
+        const heroCtx = heroCanvas.getContext('2d');
+        const bubblesArray = [];
+        const maxBubbles = 40;
+
+        function resizeHeroCanvas() {
+            const section = document.getElementById('home');
+            heroCanvas.width = section.offsetWidth;
+            heroCanvas.height = section.offsetHeight;
+        }
+
+        class Bubble {
+            constructor() {
+                this.x = Math.random() * heroCanvas.width;
+                this.y = heroCanvas.height + 10;
+                this.radius = Math.random() * 8 + 4;
+                this.speed = Math.random() * 0.5 + 0.1;
+                this.alpha = Math.random() * 0.4 + 0.1;
+                this.color = '#00FFFF'; // Cyan
+            }
+
+            update() {
+                this.y -= this.speed;
+                this.x += Math.sin(this.y / 50) * 0.2; // Gentle horizontal sway
+
+                if (this.y < -this.radius) {
+                    this.y = heroCanvas.height + this.radius;
+                    this.x = Math.random() * heroCanvas.width;
+                }
+            }
+
+            draw() {
+                heroCtx.beginPath();
+                heroCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                heroCtx.fillStyle = `rgba(0, 255, 255, ${this.alpha})`;
+                heroCtx.fill();
+            }
+        }
+
+        function initBubbles() {
+            bubblesArray.length = 0;
+            for (let i = 0; i < maxBubbles; i++) {
+                bubblesArray.push(new Bubble());
+            }
+        }
+
+        function heroLoop() {
+            resizeHeroCanvas();
+            // Black background for hero section to fade bubbles
+            heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
+            heroCtx.fillStyle = 'rgba(10, 10, 10, 0.9)'; 
+            heroCtx.fillRect(0, 0, heroCanvas.width, heroCanvas.height);
+
+
+            bubblesArray.forEach(bubble => {
+                bubble.update();
+                bubble.draw();
+            });
+
+            requestAnimationFrame(heroLoop);
+        }
+
+
+        // --- 2. Contact Section Lighting/Glow Effect ---
+        const glowCanvas = document.getElementById('contactGlow');
+        const glowCtx = glowCanvas.getContext('2d');
+        const particles = [];
+        const numParticles = 30;
+
+        function resizeGlowCanvas() {
+            const section = document.getElementById('contact');
+            glowCanvas.width = section.offsetWidth;
+            glowCanvas.height = section.offsetHeight;
+        }
+
+        // Initialize particles
+        class Particle {
+            constructor() {
+                this.x = Math.random() * glowCanvas.width;
+                this.y = Math.random() * glowCanvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 1.5 + 0.5;
+                this.alpha = Math.random() * 0.5 + 0.1;
+                this.color = '#00FFFF'; // Cyan highlight color
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > glowCanvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > glowCanvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                glowCtx.beginPath();
+                glowCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                glowCtx.fillStyle = `rgba(0, 255, 255, ${this.alpha})`;
+                glowCtx.fill();
+            }
+        }
+
+        // Create initial particles
+        function initParticles() {
+            particles.length = 0;
+            for (let i = 0; i < numParticles; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        // Connect nearby particles to create "lightning" effect
+        function connectParticles() {
+            let maxDistance = 100;
+
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dist = Math.sqrt(
+                        (particles[i].x - particles[j].x) ** 2 +
+                        (particles[i].y - particles[j].y) ** 2
+                    );
+
+                    if (dist < maxDistance) {
+                        const alpha = 1 - dist / maxDistance;
+                        glowCtx.beginPath();
+                        glowCtx.strokeStyle = `rgba(0, 255, 255, ${alpha * 0.5})`;
+                        glowCtx.lineWidth = 1;
+                        glowCtx.moveTo(particles[i].x, particles[i].y);
+                        glowCtx.lineTo(particles[j].x, particles[j].y);
+                        glowCtx.stroke();
+                    }
+                }
+            }
+        }
+
+        function glowLoop() {
+            resizeGlowCanvas();
+            glowCtx.clearRect(0, 0, glowCanvas.width, glowCanvas.height);
+            glowCtx.fillStyle = 'rgba(10, 10, 10, 0.9)'; 
+            glowCtx.fillRect(0, 0, glowCanvas.width, glowCanvas.height);
+
+            connectParticles();
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            requestAnimationFrame(glowLoop);
+        }
+
+        // --- Initialization and Event Listeners ---
+        window.onload = function () {
+            // Hero Bubbles Setup
+            resizeHeroCanvas();
+            initBubbles();
+            requestAnimationFrame(heroLoop);
+
+            // Contact Glow Setup
+            resizeGlowCanvas();
+            initParticles();
+            requestAnimationFrame(glowLoop);
+
+            // Team Carousel Start
+            requestAnimationFrame(scrollLoop);
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeHeroCanvas();
+            resizeGlowCanvas();
+        });
+
+        
+  function payWithPaystack(plan) {
+    let amount = plan === 'foundation' ? 50000 : 150000; // Amount in Kobo
+    let description = plan === 'foundation' ? "C++ Foundation Plan" : "C++ Premium Plan";
+    let handler = PaystackPop.setup({
+      key: 'pk_live_eccbaa0922c331daccb6f8bbfa4896a004ac13fb', // Replace with your Paystack Public Key
+      email: 'sanusibayero6@email.com', // Replace dynamically if needed
+      amount: amount,
+      currency: 'NGN',
+      callback: function(response){
+        window.location.href = `https://wa.me/2348084654408?text=I%20just%20paid%20for%20Scope%20${description}.%20Here%20is%20my%20name%20and%20phone%20number.`;
+      },
+      onClose: function(){
+        alert('Payment window closed.');
+      }
+    });
+    handler.openIframe();
+  }
+    </script>
+</body>
+</html>
