@@ -1,565 +1,644 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lunnovate | Make Tech Native - Empowering Africa's Digital Future</title>
-    <!-- Tailwind CSS CDN -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunnovate | Innovating the Future</title>
+    <meta name="description"
+        content="Innovating the Future with cutting-edge software solutions and empowering Africa's digital future.">
+    <meta name="keywords"
+        content="Software Development, AI Solutions, Game Development, Mobile App Development, Tech Education, Africa">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="lunnovate.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" type="image/png" href="lunnovate.png">
-    <!-- Google Fonts - Poppins (Body) & Orbitron (Headings/Logo) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet" />
-    
-    <style>
-        /* Custom Tailwind Configuration */
-        body {
-            font-family: 'Poppins', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #0a0a0a;
-            color: #e5e5e5;
-        }
-        h1, h2, h3 {
-            font-family: 'Orbitron', sans-serif;
-        }
-        .cta-btn-glow {
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
-            transition: all 0.3s ease;
-        }
-        .cta-btn-glow:hover {
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 50px rgba(0, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-        .team-carousel {
-            display: flex;
-            overflow-x: scroll; 
-            -webkit-overflow-scrolling: touch; 
-        }
-        .team-card {
-            min-width: 250px; 
-            flex-shrink: 0; 
-        }
-        /* Hide scrollbar for aesthetics */
-        .team-carousel::-webkit-scrollbar {
-            display: none;
-        }
-        .team-carousel {
-            -ms-overflow-style: none;  
-            scrollbar-width: none;  
-        }
-        
-        /* --- Canvas Styles --- */
-        #heroBubbles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Below content */
-            opacity: 0.15; /* Subtle background */
-        }
-        #contactGlow {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.25; /* Slightly more visible glow */
-        }
-
-    </style>
-
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        'lun-dark': '#0a0a0a',
-                        'lun-card': '#1c1c1c',
-                        'lun-highlight': '#00FFFF', /* Cyan */
-                        'lun-accent': '#FFD200', /* Yellow */
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Plus Jakarta Sans', 'sans-serif'],
                     },
-                }
-            }
-        }
-    </script>
-</head>
-<body>
-    
-    <!-- Navbar -->
-    <header class="sticky top-0 z-50 bg-black bg-opacity-90 shadow-2xl shadow-lun-highlight/10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6 lg:px-8">
-            <a href="#home" class="flex items-center gap-2 text-2xl font-bold font-heading">
-                <!-- SVG Logo Placeholder -->
-                <img src="lunnovate.png" class="w-8 h-8" alt="icon" />Lunnovate
-            </a>
-            
-            <!-- Desktop Navigation -->
-            <nav class="hidden md:flex space-x-8 items-center text-lg font-medium">
-                <a href="#about" class="hover:text-lun-highlight transition-colors">About</a>
-                <a href="#programs" class="hover:text-lun-highlight transition-colors">Programs</a>
-                <a href="#impact" class="hover:text-lun-highlight transition-colors">Impact</a>
-                <a href="#contact" class="px-5 py-2 text-lun-dark bg-lun-highlight rounded-full font-semibold hover:bg-opacity-80 transition-all cta-btn-glow">Get Involved</a>
-            </nav>
-            
-            <!-- Mobile Menu Button -->
-            <button id="hamburger" class="md:hidden text-lun-highlight focus:outline-none p-2 rounded-lg hover:bg-lun-card" aria-label="Toggle navigation">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-    </header>
-
-    <!-- Mobile Menu & Overlay -->
-    <div id="overlay" class="fixed inset-0 bg-black/70 z-40 hidden md:hidden" onclick="toggleMenu()"></div>
-    <div id="mobileMenu" class="fixed top-0 right-0 w-64 h-full bg-lun-card transform translate-x-full transition-transform duration-300 z-50 shadow-xl md:hidden">
-        <div class="flex justify-end p-4">
-            <button onclick="toggleMenu()" class="text-lun-highlight hover:text-white">
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        <ul class="flex flex-col gap-6 p-6 text-xl">
-            <li><a href="#home" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">Home</a></li>
-            <li><a href="#about" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">About</a></li>
-            <li><a href="#programs" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">Programs</a></li>
-            <li><a href="#impact" onclick="toggleMenu()" class="block hover:text-lun-highlight transition-colors">Impact</a></li>
-            <li><a href="#contact" onclick="toggleMenu()" class="block mt-4 px-4 py-2 text-lun-dark bg-lun-highlight rounded-lg font-semibold cta-btn-glow">Join Us</a></li>
-        </ul>
-    </div>
-
-    <!-- 1. Hero Section -->
-    <section id="home" class="relative min-h-[85vh] flex flex-col items-center justify-center text-center pt-24 pb-12 overflow-hidden px-4">
-        <!-- Canvas for Subtle Bubbles Effect -->
-        <canvas id="heroBubbles"></canvas>
-        <div class="relative z-10">
-            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black mb-4 leading-tight">
-                MAKE TECH <span class="text-lun-highlight">NATIVE.</span>
-            </h1>
-            <p class="text-lg sm:text-xl text-gray-400 max-w-3xl mb-8">
-                Empowering young Africans to confidently shape and lead in their digital future.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="#programs" class="cta-btn-glow px-8 py-3 bg-lun-highlight text-lun-dark font-bold rounded-full shadow-lg hover:bg-opacity-90 transition-all">
-                    Join Bootcamp
-                </a>
-                <a href="#contact" class="px-8 py-3 border-2 border-lun-highlight text-lun-highlight font-bold rounded-full hover:bg-lun-highlight hover:text-lun-dark transition-all">
-                    Partner With Us
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. About Us & Objectives Section -->
-    <section id="about" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <h2 class="text-4xl font-extrabold mb-4 text-lun-highlight">Who We Are</h2>
-        <p class="text-lg text-gray-400 max-w-4xl mx-auto mb-12">
-            Lunnovate is a youth-led innovation network committed to bridging the gap between young Africans and emerging technologies. Rooted in Nigeria, we equip students with the tools and mindset to not just use technology but create it.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-12">
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent">
-                <h3 class="text-2xl font-bold mb-3 text-lun-accent">Our Vision</h3>
-                <p class="text-gray-400">A future where every young African can confidently shape and lead in the digital world, becoming producers, not just consumers.</p>
-            </div>
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent">
-                <h3 class="text-2xl font-bold mb-3 text-lun-accent">Our Mission</h3>
-                <p class="text-gray-400">To localize tech education, foster innovation, and inspire leadership through relatable, accessible, and impactful learning experiences.</p>
-            </div>
-        </div>
-
-        <div class="mt-16 pt-12 border-t border-gray-800">
-            <h3 class="text-3xl font-bold mb-6 text-lun-highlight">Core Objectives</h3>
-            <div class="flex flex-wrap justify-center gap-6">
-                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Early exposure to AI and digital tools</div>
-                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Promote Tech-powered problem-solving</div>
-                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Integrate Indigenous language learning</div>
-                <div class="p-4 bg-lun-card rounded-lg text-lg text-gray-300 font-medium border-l-4 border-lun-highlight">Establish School-based innovation communities</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. Key Programs -->
-    <section id="programs" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Key Programs</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-b-4 border-lun-highlight transition duration-300 hover:shadow-lun-highlight/30">
-                <h3 class="text-2xl font-bold mb-2 text-lun-highlight">#MakeTechNative Movement</h3>
-                <p class="text-gray-400">Our flagship initiative: Tech workshops that bring AI and digital skills to secondary schools in culturally relatable ways.</p>
-            </div>
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-b-4 border-lun-highlight transition duration-300 hover:shadow-lun-highlight/30">
-                <h3 class="text-2xl font-bold mb-2 text-lun-highlight">AI Awareness Workshops</h3>
-                <p class="text-gray-400">Hands-on sessions teaching students the core mechanics of AI and positioning them as active participants in its future development.</p>
-            </div>
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-b-4 border-lun-highlight transition duration-300 hover:shadow-lun-highlight/30">
-                <h3 class="text-2xl font-bold mb-2 text-lun-highlight">EcoBridge (Hausa AI Chatbot)</h3>
-                <p class="text-gray-400">Developing AI-powered tools that facilitate learning and knowledge access in native languages, starting with Hausa.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. Impact & Future Goals -->
-    <section id="impact" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-lun-dark">
-        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Impact & Vision</h2>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Current Impact -->
-            <div class="bg-lun-card p-8 rounded-2xl shadow-2xl border border-gray-700">
-                <h3 class="text-3xl font-bold mb-6 text-lun-accent">Milestones Achieved</h3>
-                <ul class="space-y-4 text-gray-300 text-lg list-disc pl-5">
-                    <li>Successfully hosted workshops at schools in Kano.</li>
-                    <li>Trained 1000+ of students in AI basics and critical digital skills.</li>
-                    <li>Received overwhelmingly positive feedback from teachers and students alike.</li>
-                </ul>
-            </div>
-            
-            <!-- Future Goals -->
-            <div class="bg-lun-card p-8 rounded-2xl shadow-2xl border border-gray-700">
-                <h3 class="text-3xl font-bold mb-6 text-lun-highlight">Future Goals</h3>
-                <ul class="space-y-4 text-gray-300 text-lg list-disc pl-5">
-                    <li>Scale the #MakeTechNative Movement nationwide.</li>
-                    <li>Launch structured student–mentor programs.</li>
-                    <li>Build a digital learning hub for continuous growth.</li>
-                    <li>Expand the EcoBridge project to include more native African languages.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5. Projects Section (NEW) -->
-    <section id="projects" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Our Impact in Action</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- Project Card 1: Localized Learning Platform -->
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent transition duration-300 hover:shadow-lun-accent/30">
-                <h3 class="text-2xl font-bold mb-2 text-lun-accent">EcoBridge: Hausa LLM</h3>
-                <p class="text-gray-400 mb-4 text-sm">A foundational large language model trained to support educational content and critical thinking in the Hausa language, bridging the digital language divide.</p>
-                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-lun-highlight/20 text-lun-highlight">AI/ML</span>
-            </div>
-            
-            <!-- Project Card 2: Robotics Challenge -->
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent transition duration-300 hover:shadow-lun-accent/30">
-                <h3 class="text-2xl font-bold mb-2 text-lun-accent">School Innovation Hubs</h3>
-                <p class="text-gray-400 mb-4 text-sm">Establishing dedicated, self-sustaining tech clubs in secondary schools focused on local problem-solving using open-source hardware and software.</p>
-                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-lun-highlight/20 text-lun-highlight">Community & IoT</span>
-            </div>
-
-            <!-- Project Card 3: Digital Literacy Initiative -->
-            <div class="bg-lun-card p-6 rounded-xl shadow-xl border-t-4 border-lun-accent transition duration-300 hover:shadow-lun-accent/30">
-                <h3 class="text-2xl font-bold mb-2 text-lun-accent">Project Digital Shield</h3>
-                <p class="text-gray-400 mb-4 text-sm">A mobile workshop series dedicated to teaching essential digital security, critical media consumption, and cyber ethics to high school students.</p>
-                <span class="inline-block px-3 py-1 text-sm font-semibold rounded-full bg-lun-highlight/20 text-lun-highlight">Cyber Security</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- 6. Team Section (Optimized Carousel) -->
-    <section id="team" class="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <h2 class="text-4xl font-extrabold mb-12 text-center text-lun-highlight">Meet the Visionaries</h2>
-        
-        <!-- Optimized Team Carousel Container -->
-        <div class="team-carousel pb-6 space-x-6 flex flex-nowrap" id="teamContainer">
-            <!-- Content generated by JS -->
-        </div>
-    </section>
-
-    <!-- 7. Resources & Contact Section -->
-    <section id="contact" class="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center overflow-hidden">
-        <!-- Canvas for Lighting/Glow Effect -->
-        <canvas id="contactGlow"></canvas>
-        <div class="relative z-10">
-            <h2 class="text-4xl font-extrabold mb-4 text-lun-accent">Ready to Create the Future?</h2>
-            <p class="text-lg text-gray-400 max-w-3xl mx-auto mb-10">Join our movement, support our mission, or start a collaboration.</p>
-            
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a class="cta-btn-glow px-8 py-3 bg-lun-highlight text-lun-dark font-bold rounded-full shadow-lg hover:bg-opacity-90 transition-all" onclick="payWithPaystack('foundation')">
-                    Support our mission
-                </a>
-                <a href="https://wa.me/2348084654408" class="px-8 py-3 border-2 border-lun-accent text-lun-accent font-bold rounded-full hover:bg-lun-accent hover:text-lun-dark transition-all">
-                   Join our movement
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black border-t-4 border-lun-highlight py-8 px-4 text-center">
-        <p class="text-sm text-gray-500">&copy; 2025 Lunnovate. All Rights Reserved. | Make Tech Native Movement</p>
-    </footer>
-
-    <!-- JavaScript -->
-     <script src="https://js.paystack.co/v1/inline.js"></script>
-    <script>
-        // --- Mobile Menu Toggle ---
-        const mobileMenu = document.getElementById('mobileMenu');
-        const overlay = document.getElementById('overlay');
-        const hamburger = document.getElementById('hamburger');
-
-        function toggleMenu() {
-            const isActive = mobileMenu.classList.contains('translate-x-full');
-            if (isActive) {
-                mobileMenu.classList.remove('translate-x-full');
-                overlay.classList.remove('hidden');
-            } else {
-                mobileMenu.classList.add('translate-x-full');
-                overlay.classList.add('hidden');
-            }
-        }
-        hamburger.addEventListener('click', toggleMenu);
-        
-        // --- Team Carousel (Infinite Auto-Scroll) ---
-        const teamData = [
-            { initials: 'ISB', name: 'Ibrahim Sanusi Bayero', role: 'Founder & Chief Technology Officer (CTO)', color: 'bg-red-500' },
-            { initials: 'TYH', name: 'Tijjani Yusuf Hassan', role: 'Marketing & Business Dev', color: 'bg-green-500' },
-            { initials: 'MA', name: 'Muhammad Aminu', role: ' Co-founder & Lead AI Engineer', color: 'bg-blue-500' },
-            { initials: 'RB', name: 'Ridwan Bello', role: 'Project Manager', color: 'bg-yellow-500' },
-            { initials: 'AA', name: 'Adeneye Abdulganiyu', role: 'Community Engagement Lead', color: 'bg-purple-500' },
-            { initials: 'SA', name: 'Safwan Abdullahi', role: 'Finance & Admin Officer', color: 'bg-red-500' },
-            { initials: 'ASM', name: 'Adamu Sulaiman Muhammed', role: 'Quality Assurance (QA)', color: 'bg-green-500' },
-            { initials: 'MMU', name: 'Muhammad Muktar Usman', role: 'Creative Director', color: 'bg-blue-500' },
-            { initials: 'AA', name: 'Abdallah Abdallah', role: 'Curriculum Designer', color: 'bg-yellow-500' },
-            { initials: 'M', name: 'Muhammad', role: 'Research & Impact Officer', color: 'bg-purple-500' },
-            { initials: 'AI', name: 'Aliyu Ilu', role: 'Communications & Media Lead', color: 'bg-red-500' },
-            { initials: 'ASB', name: 'Abubakar Sadiq Bilya', role: 'Operations & Logistics Officer', color: 'bg-green-500' }
-        ];
-
-        const teamContainer = document.getElementById('teamContainer');
-        
-        // Function to create a placeholder SVG with initials
-        function createAvatar(initials, color) {
-            return `<div class="w-24 h-24 ${color} rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-lun-highlight/50">
-                        <span class="text-3xl font-bold font-heading text-white">${initials}</span>
-                    </div>`;
-        }
-
-        const cardHtml = teamData.map(m => `
-            <div class='team-card bg-lun-card p-6 rounded-xl shadow-lg border border-gray-800 transition duration-300 hover:border-lun-highlight/50'>
-                ${createAvatar(m.initials, m.color)}
-                <h3 class='text-xl font-bold text-lun-highlight mb-1'>${m.name}</h3>
-                <p class='text-gray-400 text-sm'>${m.role}</p>
-            </div>
-        `).join('');
-
-        // Duplicate the content to enable seamless looping
-        teamContainer.innerHTML = cardHtml + cardHtml;
-
-        let scrollSpeed = 0.5; // Pixels per frame
-        let currentScroll = 0;
-        let isHovering = false;
-        let scrollLoopId;
-        
-        // Auto-scroll function
-        function scrollLoop() {
-            if (!isHovering) {
-                currentScroll += scrollSpeed;
-                
-                // When the scroll position passes the original set of cards, reset it to 0
-                if (currentScroll >= teamContainer.scrollWidth / 2) {
-                    currentScroll = 0;
-                }
-                
-                teamContainer.scrollLeft = currentScroll;
-            }
-            scrollLoopId = requestAnimationFrame(scrollLoop);
-        }
-        
-        // Pause auto-scrolling when the user interacts (manual scroll or hover)
-        teamContainer.addEventListener('mouseenter', () => { isHovering = true; });
-        teamContainer.addEventListener('mouseleave', () => { isHovering = false; });
-        teamContainer.addEventListener('touchstart', () => { isHovering = true; });
-        teamContainer.addEventListener('touchend', () => { isHovering = false; });
-        
-        
-        // --- 1. Hero Section Bubbles Effect ---
-        const heroCanvas = document.getElementById('heroBubbles');
-        const heroCtx = heroCanvas.getContext('2d');
-        const bubblesArray = [];
-        const maxBubbles = 40;
-
-        function resizeHeroCanvas() {
-            const section = document.getElementById('home');
-            heroCanvas.width = section.offsetWidth;
-            heroCanvas.height = section.offsetHeight;
-        }
-
-        class Bubble {
-            constructor() {
-                this.x = Math.random() * heroCanvas.width;
-                this.y = heroCanvas.height + 10;
-                this.radius = Math.random() * 8 + 4;
-                this.speed = Math.random() * 0.5 + 0.1;
-                this.alpha = Math.random() * 0.4 + 0.1;
-                this.color = '#00FFFF'; // Cyan
-            }
-
-            update() {
-                this.y -= this.speed;
-                this.x += Math.sin(this.y / 50) * 0.2; // Gentle horizontal sway
-
-                if (this.y < -this.radius) {
-                    this.y = heroCanvas.height + this.radius;
-                    this.x = Math.random() * heroCanvas.width;
-                }
-            }
-
-            draw() {
-                heroCtx.beginPath();
-                heroCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                heroCtx.fillStyle = `rgba(0, 255, 255, ${this.alpha})`;
-                heroCtx.fill();
-            }
-        }
-
-        function initBubbles() {
-            bubblesArray.length = 0;
-            for (let i = 0; i < maxBubbles; i++) {
-                bubblesArray.push(new Bubble());
-            }
-        }
-
-        function heroLoop() {
-            resizeHeroCanvas();
-            // Black background for hero section to fade bubbles
-            heroCtx.clearRect(0, 0, heroCanvas.width, heroCanvas.height);
-            heroCtx.fillStyle = 'rgba(10, 10, 10, 0.9)'; 
-            heroCtx.fillRect(0, 0, heroCanvas.width, heroCanvas.height);
-
-
-            bubblesArray.forEach(bubble => {
-                bubble.update();
-                bubble.draw();
-            });
-
-            requestAnimationFrame(heroLoop);
-        }
-
-
-        // --- 2. Contact Section Lighting/Glow Effect ---
-        const glowCanvas = document.getElementById('contactGlow');
-        const glowCtx = glowCanvas.getContext('2d');
-        const particles = [];
-        const numParticles = 30;
-
-        function resizeGlowCanvas() {
-            const section = document.getElementById('contact');
-            glowCanvas.width = section.offsetWidth;
-            glowCanvas.height = section.offsetHeight;
-        }
-
-        // Initialize particles
-        class Particle {
-            constructor() {
-                this.x = Math.random() * glowCanvas.width;
-                this.y = Math.random() * glowCanvas.height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.radius = Math.random() * 1.5 + 0.5;
-                this.alpha = Math.random() * 0.5 + 0.1;
-                this.color = '#00FFFF'; // Cyan highlight color
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Bounce off edges
-                if (this.x < 0 || this.x > glowCanvas.width) this.vx *= -1;
-                if (this.y < 0 || this.y > glowCanvas.height) this.vy *= -1;
-            }
-
-            draw() {
-                glowCtx.beginPath();
-                glowCtx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                glowCtx.fillStyle = `rgba(0, 255, 255, ${this.alpha})`;
-                glowCtx.fill();
-            }
-        }
-
-        // Create initial particles
-        function initParticles() {
-            particles.length = 0;
-            for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        // Connect nearby particles to create "lightning" effect
-        function connectParticles() {
-            let maxDistance = 100;
-
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dist = Math.sqrt(
-                        (particles[i].x - particles[j].x) ** 2 +
-                        (particles[i].y - particles[j].y) ** 2
-                    );
-
-                    if (dist < maxDistance) {
-                        const alpha = 1 - dist / maxDistance;
-                        glowCtx.beginPath();
-                        glowCtx.strokeStyle = `rgba(0, 255, 255, ${alpha * 0.5})`;
-                        glowCtx.lineWidth = 1;
-                        glowCtx.moveTo(particles[i].x, particles[i].y);
-                        glowCtx.lineTo(particles[j].x, particles[j].y);
-                        glowCtx.stroke();
+                    colors: {
+                        brand: {
+                            bg: '#0b1220',
+                            panel: '#0f172a',
+                            card: '#1e293b',
+                            violet: '#7c3aed',
+                            cyan: '#22d3ee',
+                        }
+                    },
+                    animation: {
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
                     }
                 }
             }
         }
-
-        function glowLoop() {
-            resizeGlowCanvas();
-            glowCtx.clearRect(0, 0, glowCanvas.width, glowCanvas.height);
-            glowCtx.fillStyle = 'rgba(10, 10, 10, 0.9)'; 
-            glowCtx.fillRect(0, 0, glowCanvas.width, glowCanvas.height);
-
-            connectParticles();
-            
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-
-            requestAnimationFrame(glowLoop);
+    </script>
+    <style>
+        body {
+            background-color: #0b1220;
+            color: #f8fafc;
+            overflow-x: hidden;
         }
 
-        // --- Initialization and Event Listeners ---
-        window.onload = function () {
-            // Hero Bubbles Setup
-            resizeHeroCanvas();
-            initBubbles();
-            requestAnimationFrame(heroLoop);
-
-            // Contact Glow Setup
-            resizeGlowCanvas();
-            initParticles();
-            requestAnimationFrame(glowLoop);
-
-            // Team Carousel Start
-            requestAnimationFrame(scrollLoop);
+        .text-gradient {
+            background: linear-gradient(135deg, #22d3ee 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
-        window.addEventListener('resize', () => {
-            resizeHeroCanvas();
-            resizeGlowCanvas();
+
+        .bg-gradient-glow {
+            background: radial-gradient(circle at center, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-nav {
+            background: rgba(11, 18, 32, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Hide scrollbar for team carousel */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 {
+            transition-delay: 100ms;
+        }
+
+        .delay-200 {
+            transition-delay: 200ms;
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-brand-violet selection:text-white">
+
+    <!-- Background Glow Effects -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div
+            class="absolute top-0 left-1/4 w-96 h-96 bg-brand-violet/20 rounded-full mix-blend-screen filter blur-[128px] animate-blob">
+        </div>
+        <div
+            class="absolute top-1/4 right-1/4 w-96 h-96 bg-brand-cyan/20 rounded-full mix-blend-screen filter blur-[128px] animate-blob animation-delay-2000">
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="lunnovate.png" alt="Lunnovate Logo" class="w-6 h-6">
+
+                <span class="font-display font-bold text-2xl tracking-tight text-white">Lunnovate</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#about" class="text-slate-300 hover:text-brand-cyan transition-colors">About</a>
+                <a href="#services" class="text-slate-300 hover:text-brand-cyan transition-colors">Services</a>
+                <a href="#programs" class="text-slate-300 hover:text-brand-cyan transition-colors">Programs</a>
+                <a href="#team" class="text-slate-300 hover:text-brand-cyan transition-colors">Team</a>
+                <a href="#contact"
+                    class="px-6 py-2.5 rounded-full bg-white text-brand-bg font-bold hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all hover:-translate-y-0.5">
+                    Contact Us
+                </a>
+            </div>
+
+            <button class="md:hidden text-white text-2xl p-2" id="mobile-menu-btn" aria-label="Menu">
+                <i class="ph ph-list" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-brand-panel border-b border-white/5 absolute w-full left-0 top-20 shadow-2xl flex-col overflow-hidden transition-all duration-300">
+            <a href="#about" class="p-5 border-b border-white/5 text-slate-300 font-medium hover:bg-white/5">About
+                Us</a>
+            <a href="#services"
+                class="p-5 border-b border-white/5 text-slate-300 font-medium hover:bg-white/5">Services</a>
+            <a href="#programs"
+                class="p-5 border-b border-white/5 text-slate-300 font-medium hover:bg-white/5">Programs</a>
+            <a href="#team" class="p-5 border-b border-white/5 text-slate-300 font-medium hover:bg-white/5">Team</a>
+            <a href="#contact"
+                class="p-6 text-center bg-gradient-to-r from-brand-cyan to-brand-violet text-white font-bold">Contact
+                Us</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-20">
+        <!-- HERO SECTION -->
+        <section class="min-h-[85vh] flex flex-col justify-center items-center text-center px-6 relative py-20">
+            <div class="max-w-5xl mx-auto reveal active">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-violet/30 bg-brand-violet/10 text-brand-cyan text-xs font-bold tracking-widest uppercase mb-8 shadow-[0_0_15px_rgba(124,58,237,0.15)]">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-cyan"></span>
+                    </span>
+                    AI UNLEASHED Workshop Now Live
+                </div>
+
+                <h1
+                    class="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight">
+                    Innovating the Future.<br class="hidden sm:block">
+                    Empowering Africa.<br class="hidden sm:block">
+                    <span class="text-gradient">Together.</span>
+                </h1>
+
+                <p class="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    We are problem-solvers bridging the gap. From groundbreaking software development to empowering
+                    young Africans through the <span class="text-white font-semibold">#MakeTechNative</span> movement.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#contact"
+                        class="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-brand-bg font-bold hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all hover:-translate-y-1 flex items-center justify-center gap-2 text-lg">
+                        Join the Network <i class="ph-bold ph-arrow-right"></i>
+                    </a>
+                    <a href="#programs"
+                        class="w-full sm:w-auto px-8 py-4 rounded-full glass-card text-white font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-2 text-lg">
+                        Explore Programs
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="py-24 px-6 border-t border-white/5">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white mb-4">Why Lunnovate?</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto text-lg">We bridge the gap between classroom theory and
+                        real-world tech execution.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div
+                        class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 reveal">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-brand-violet/20 flex items-center justify-center text-brand-violet mb-6 border border-brand-violet/30">
+                            <i class="ph-fill ph-student text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 font-display">Student-First</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">Tailored workshops and resources designed for
+                            African students to grasp complex topics like AI effortlessly.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 reveal"
+                        style="transition-delay: 100ms;">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-brand-cyan/20 flex items-center justify-center text-brand-cyan mb-6 border border-brand-cyan/30">
+                            <i class="ph-fill ph-code-block text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 font-display">Hands-on Execution</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">Less talk, more building. We focus on hands-on
+                            prompting, coding, and deploying actual solutions.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl hover:-translate-y-2 transition-transform duration-300 reveal"
+                        style="transition-delay: 200ms;">
+                        <div
+                            class="w-14 h-14 rounded-xl bg-gradient-to-br from-brand-cyan to-brand-violet flex items-center justify-center text-white mb-6">
+                            <i class="ph-fill ph-users-three text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-3 font-display">Community Power</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">A thriving network of peers and mentors
+                            sharing opportunities and growing the tech ecosystem together.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SERVICES SECTION -->
+        <section id="services" class="py-24 px-6 bg-brand-panel/20">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h3 class="text-brand-cyan font-bold tracking-widest uppercase text-xs mb-3">Expertise</h3>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white mb-4">Our Services</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto text-lg">Scalable, forward-thinking solutions for the
+                        modern era.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div
+                        class="glass-card p-8 rounded-2xl hover:border-brand-cyan/50 transition-all duration-300 reveal group">
+                        <i class="ph-fill ph-code text-3xl text-brand-cyan mb-6 block"></i>
+                        <h3 class="text-xl font-bold text-white mb-2 font-display">Software Dev</h3>
+                        <p class="text-slate-400 text-sm">Custom web applications and enterprise systems built for speed
+                            and scale.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl hover:border-brand-violet/50 transition-all duration-300 reveal group"
+                        style="transition-delay: 100ms;">
+                        <i class="ph-fill ph-brain text-3xl text-brand-violet mb-6 block"></i>
+                        <h3 class="text-xl font-bold text-white mb-2 font-display">AI Solutions</h3>
+                        <p class="text-slate-400 text-sm">Implementing LLMs, NLP, and intelligent automation for smarter
+                            business flows.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl hover:border-brand-cyan/50 transition-all duration-300 reveal group"
+                        style="transition-delay: 200ms;">
+                        <i class="ph-fill ph-game-controller text-3xl text-brand-cyan mb-6 block"></i>
+                        <h3 class="text-xl font-bold text-white mb-2 font-display">Game Dev</h3>
+                        <p class="text-slate-400 text-sm">Crafting immersive experiences using modern engines like
+                            Unreal and Unity.</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl hover:border-brand-violet/50 transition-all duration-300 reveal group"
+                        style="transition-delay: 300ms;">
+                        <i class="ph-fill ph-device-mobile text-3xl text-brand-violet mb-6 block"></i>
+                        <h3 class="text-xl font-bold text-white mb-2 font-display">Mobile Apps</h3>
+                        <p class="text-slate-400 text-sm">Native and cross-platform apps with a focus on seamless user
+                            experience.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROGRAMS -->
+        <section id="programs" class="py-24 px-6 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-12 reveal">
+                    <h3 class="text-brand-violet font-bold tracking-widest uppercase text-xs mb-3">Initiatives</h3>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white">Community Projects</h2>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Featured Program Card -->
+                    <div
+                        class="glass-card rounded-[2rem] p-8 sm:p-10 border border-brand-cyan/30 relative overflow-hidden group reveal">
+                        <div
+                            class="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/10 rounded-full blur-[80px] group-hover:bg-brand-cyan/20 transition-colors">
+                        </div>
+
+                        <span
+                            class="inline-block px-3 py-1 bg-brand-cyan/20 text-brand-cyan text-xs font-bold rounded-full mb-6 uppercase tracking-wider">Flagship
+                            Product</span>
+
+                        <h3 class="font-display text-3xl font-bold text-white mb-4">EchoBridge</h3>
+                        <p class="text-slate-300 mb-8 leading-relaxed text-lg max-w-md">
+                            A foundational AI language model trained to support educational content and critical
+                            thinking in native languages, starting with Hausa. Bridging the digital language divide.
+                        </p>
+
+                        <div class="space-y-4 mb-10">
+                            <div class="flex items-center gap-3 text-slate-400">
+                                <i class="ph-fill ph-translate text-brand-cyan text-xl"></i> Native Language Processing
+                            </div>
+                            <div class="flex items-center gap-3 text-slate-400">
+                                <i class="ph-fill ph-student text-brand-cyan text-xl"></i> Built for African Students
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side Cards -->
+                    <div class="flex flex-col gap-8 reveal delay-100">
+                        <div
+                            class="glass-card rounded-[2rem] p-8 border border-white/5 hover:border-brand-violet/30 transition-colors h-full flex flex-col justify-center relative overflow-hidden group">
+                            <div
+                                class="w-12 h-12 rounded-full bg-brand-violet/20 flex items-center justify-center text-brand-violet mb-4">
+                                <i class="ph-bold ph-globe-hemisphere-east text-2xl"></i>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-white mb-2">#MakeTechNative Movement</h3>
+                            <p class="text-slate-400 leading-relaxed mb-6">
+                                We’re turning African students into AI builders.
+                                Through hands-on workshops, we equip secondary school students with real-world digital
+                                and AI skills — preparing them to lead, not follow.</p>
+                        </div>
+
+                        <div
+                            class="glass-card rounded-[2rem] p-8 border border-white/5 hover:border-white/20 transition-colors h-full flex flex-col justify-center">
+                            <div
+                                class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white mb-4">
+                                <i class="ph-bold ph-shield-check text-2xl"></i>
+                            </div>
+                            <h3 class="font-display text-2xl font-bold text-white mb-2">Project Digital Shield</h3>
+                            <p class="text-slate-400 leading-relaxed mb-6">
+                                A mobile workshop series teaching essential digital security, critical media
+                                consumption, and cyber ethics to high school students.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEAM SECTION -->
+        <section id="team" class="py-24 px-6 border-y border-white/5 bg-brand-panel/40">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="font-display text-3xl font-bold text-white mb-4">Meet the Visionaries</h2>
+                    <p class="text-slate-400 max-w-2xl mx-auto text-sm">The builders and strategists driving Lunnovate
+                        forward.</p>
+                </div>
+
+                <div class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory no-scrollbar" id="teamContainer">
+                    <!-- JS Injected Cards -->
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="py-24 px-6 relative overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-glow pointer-events-none"></div>
+            <div class="max-w-7xl mx-auto reveal">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 class="font-display text-4xl sm:text-5xl font-bold text-white mb-6">Ready to Innovate?</h2>
+                        <p class="text-slate-400 text-lg mb-10 leading-relaxed">Whether you need software solutions or
+                            want to partner on educational initiatives, we'd love to hear from you.</p>
+
+                        <div class="space-y-8 mb-12">
+                            <div class="flex items-center gap-5">
+                                <div
+                                    class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-brand-cyan shrink-0">
+                                    <i class="ph-fill ph-envelope-simple text-2xl"></i>
+                                </div>
+                                <div>
+                                    <p class="text-xs text-slate-500 uppercase font-bold tracking-widest">Email Us</p>
+                                    <a href="mailto:lunnovate@gmail.com"
+                                        class="text-lg font-bold text-white hover:text-brand-cyan transition-colors">lunnovate@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap gap-4">
+                                <a href="https://x.com/lunnovate" target="_blank"
+                                    class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-white transition-all text-2xl">
+                                    <i class="ph-fill ph-x-logo"></i>
+                                </a>
+                                <a href="https://instagram.com/lunnovate_" target="_blank"
+                                    class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-pink-500 transition-all text-2xl">
+                                    <i class="ph-fill ph-instagram-logo"></i>
+                                </a>
+                                <a href="#" target="_blank"
+                                    class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-red-500 transition-all text-2xl">
+                                    <i class="ph-fill ph-youtube-logo"></i>
+                                </a>
+                                <a href="https://wa.me/2348084654408" target="_blank"
+                                    class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-400 hover:text-green-500 transition-all text-2xl">
+                                    <i class="ph-fill ph-whatsapp-logo"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="p-6 glass-card rounded-2xl border-brand-violet/30 border max-w-sm">
+                            <h4 class="font-bold text-white mb-2">Support the Mission</h4>
+                            <p class="text-xs text-slate-400 mb-6">Help us expand the #MakeTechNative movement to more
+                                schools.</p>
+                            <button onclick="payWithPaystack('foundation')"
+                                class="w-full py-3 bg-brand-violet hover:bg-brand-violet/80 text-white font-bold rounded-xl transition-all">
+                                Donate / Support
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 md:p-10 rounded-[2rem]">
+                        <h3 class="text-2xl font-bold text-white mb-6">Send a Message</h3>
+                        <form id="contactForm" class="space-y-5">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Name</label>
+                                <input type="text" name="name" required
+                                    class="w-full px-4 py-3 bg-brand-panel/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-cyan text-white outline-none transition-all"
+                                    placeholder="Enter your name">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Email</label>
+                                <input type="email" name="email" required
+                                    class="w-full px-4 py-3 bg-brand-panel/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-cyan text-white outline-none transition-all"
+                                    placeholder="Enter your email">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-500 uppercase mb-2">Message</label>
+                                <textarea name="message" rows="4" required
+                                    class="w-full px-4 py-3 bg-brand-panel/50 border border-slate-700 rounded-xl focus:ring-2 focus:ring-brand-cyan text-white outline-none transition-all resize-none"
+                                    placeholder="How can we help you?"></textarea>
+                            </div>
+                            <button type="submit"
+                                class="w-full py-4 bg-gradient-to-r from-brand-cyan to-brand-violet text-white font-bold rounded-xl transition-all hover:opacity-90 flex justify-center items-center gap-2">
+                                Send Message <i class="ph-bold ph-paper-plane-tilt"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-panel border-t border-white/5 py-12 px-6 relative z-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6 mb-8">
+                <div class="flex items-center gap-2">
+                    <img src="lunnovate.png" alt="Lunnovate Logo" class="w-8 h-8 object-contain"
+                        onerror="this.style.display='none'">
+                    <span class="font-display font-bold text-xl tracking-tight text-white">Lunnovate</span>
+                </div>
+
+                <div class="flex items-center justify-center gap-6 sm:gap-8">
+                    <a href="https://www.youtube.com/channel/UCkgr9nGGSBMdNnmIpC-_5KA" target="_blank"
+                        class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-white hover:bg-red-500/20 hover:border-red-500/50 transition-all text-2xl"><i
+                            class="ph-fill ph-youtube-logo"></i></a>
+                    <a href="https://www.instagram.com/lunnovate_" target="_blank"
+                        class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-white hover:bg-pink-500/20 hover:border-pink-500/50 transition-all text-2xl"><i
+                            class="ph-fill ph-instagram-logo"></i></a>
+                    <a href="https://vm.tiktok.com/ZSHnNqN6jpnMK-uf7I2/" target="_blank"
+                        class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-white hover:bg-white/20 hover:border-white/50 transition-all text-2xl"><i
+                            class="ph-fill ph-tiktok-logo"></i></a>
+                    <a href="https://x.com/lunnovate?t=s8TzVorNwtiwuIG_ZPHdLw&s=08" target="_blank"
+                        class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-slate-300 hover:text-white hover:bg-blue-400/20 hover:border-blue-400/50 transition-all text-2xl"><i
+                            class="ph-fill ph-x-logo"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div
+            class="text-center md:text-left border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-slate-500 font-medium">
+                &copy; <span id="year"></span> Lunnovate. All Rights Reserved.
+            </p>
+            <p class="text-sm text-slate-500">
+                Empowering the <span class="text-brand-cyan">#MakeTechNative</span> generation.
+            </p>
+        </div>
+        </div>
+    </footer>
+
+    <!-- Paystack JS -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+
+    <script>
+        // DOM Elements
+        const yearSpan = document.getElementById('year');
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        const teamContainer = document.getElementById('teamContainer');
+
+        // Initial Setup
+        yearSpan.textContent = new Date().getFullYear();
+
+        // Mobile Menu Toggle
+        menuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex', !isHidden);
+            menuIcon.className = isHidden ? 'ph ph-list' : 'ph ph-x';
         });
 
-        
-  function payWithPaystack(plan) {
-    let amount = plan === 'foundation' ? 50000 : 150000; // Amount in Kobo
-    let description = plan === 'foundation' ? "C++ Foundation Plan" : "C++ Premium Plan";
-    let handler = PaystackPop.setup({
-      key: 'pk_live_eccbaa0922c331daccb6f8bbfa4896a004ac13fb', // Replace with your Paystack Public Key
-      email: 'sanusibayero6@email.com', // Replace dynamically if needed
-      amount: amount,
-      currency: 'NGN',
-      callback: function(response){
-        window.location.href = `https://wa.me/2348084654408?text=I%20just%20paid%20for%20Scope%20${description}.%20Here%20is%20my%20name%20and%20phone%20number.`;
-      },
-      onClose: function(){
-        alert('Payment window closed.');
-      }
-    });
-    handler.openIframe();
-  }
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                menuIcon.className = 'ph ph-list';
+            });
+        });
+
+        // Team Data
+        const teamData = [
+            { initials: 'ISB', name: 'Ibrahim Sanusi Bayero', role: 'Founder & CTO', color: 'bg-indigo-600' },
+            { initials: 'TYH', name: 'Tijjani Yusuf Hassan', role: 'Marketing & Biz Dev', color: 'bg-emerald-600' },
+            { initials: 'MA', name: 'Muhammad Aminu', role: 'Lead AI Engineer', color: 'bg-sky-600' },
+            { initials: 'RB', name: 'Ridwan Bello', role: 'Project Manager', color: 'bg-amber-600' },
+            { initials: 'AA', name: 'Adeneye Abdulganiyu', role: 'Community Lead', color: 'bg-purple-600' },
+            { initials: 'SA', name: 'Safwan Abdullahi', role: 'Finance Officer', color: 'bg-rose-600' },
+            { initials: 'ASM', name: 'Adamu Sulaiman Muhammed', role: 'Quality Assurance', color: 'bg-teal-600' },
+            { initials: 'MMU', name: 'Muhammad Muktar Usman', role: 'Creative Director', color: 'bg-indigo-500' },
+            { initials: 'AA', name: 'Abdallah Abdallah', role: 'Curriculum Designer', color: 'bg-orange-600' }
+        ];
+
+        // Generate Team Cards
+        const cardHtml = teamData.map(member => `
+<div class="team-card glass-card min-w-[340px] p-8 rounded-3xl text-center border-white/5 hover:border-brand-cyan/30 transition-all duration-300">                <div class="w-20 h-20 ${member.color} rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl text-white text-2xl font-bold">
+                    ${member.initials}
+                </div>
+                <h3 class="text-white font-bold text-lg mb-1">${member.name}</h3>
+                <p class="text-slate-500 text-xs font-medium uppercase tracking-widest">${member.role}</p>
+            </div>
+        `).join('');
+
+        // Double items for seamless loop
+        teamContainer.innerHTML = cardHtml + cardHtml;
+
+        // Auto-Scroll Logic
+        let scrollPos = 0;
+        let isPaused = false;
+
+        function animateTeam() {
+            if (!isPaused) {
+                scrollPos += 0.5;
+                if (scrollPos >= teamContainer.scrollWidth / 2) {
+                    scrollPos = 0;
+                }
+                teamContainer.scrollLeft = scrollPos;
+            }
+            requestAnimationFrame(animateTeam);
+        }
+
+        teamContainer.addEventListener('mouseenter', () => isPaused = true);
+        teamContainer.addEventListener('mouseleave', () => isPaused = false);
+        teamContainer.addEventListener('touchstart', () => isPaused = true);
+        teamContainer.addEventListener('touchend', () => isPaused = false);
+
+        // Intersection Observer for Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Start animation on load
+        window.onload = () => {
+            animateTeam();
+        };
+
+        // Paystack Support
+        function payWithPaystack(plan) {
+            const amount = plan === 'foundation' ? 500000 : 250000;
+            const handler = PaystackPop.setup({
+                key: 'pk_live_eccbaa0922c331daccb6f8bbfa4896a004ac13fb',
+                email: 'support@lunnovate.com',
+                amount: amount,
+                currency: 'NGN',
+                callback: function (response) {
+                    window.location.href = `https://wa.me/2348084654408?text=Hello! I just supported Lunnovate. Ref: ${response.reference}`;
+                }
+            });
+            handler.openIframe();
+        }
+
+        // Form Handling
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "Sending...";
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = "Message Sent! <i class='ph-bold ph-check'></i>";
+                btn.classList.replace('bg-gradient-to-r', 'bg-green-600');
+                e.target.reset();
+            }, 1500);
+        });
     </script>
 </body>
+
 </html>
