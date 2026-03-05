@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#MakeTechNative | Engineering Africa's Future & AI Starter Kit</title>
+    <meta name="description" content="Technology built by Africans, for Africans, solving African problems at scale. Includes the AI UNLEASHED Student Starter Kit by Lunnovate.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;800;800&display=swap" rel="stylesheet">
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                        display: ['Syne', 'sans-serif'],
+                    },
+                    colors: {
+                        base: {
+                            900: '#0a0a0a', 
+                            800: '#121212', 
+                            700: '#262626', 
+                        },
+                        neon: {
+                            green: '#00ff66', 
+                            yellow: '#facc15',
+                            cyan: '#6ee7ff', 
+                            purple: '#7c3aed' 
+                        }
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #262626 1px, transparent 1px), linear-gradient(to bottom, #262626 1px, transparent 1px)",
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+        
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+        }
+
+        /* Typewriter effect for Hero */
+        .typewriter-text {
+            border-right: 2px solid #00ff66;
+            animation: blink 0.75s step-end infinite;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #00ff66; }
+        }
+
+        .highlight-text {
+            background: linear-gradient(120deg, #00ff66 0%, #34d399 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glow-box {
+            position: relative;
+        }
+        .glow-box::before {
+            content: '';
+            position: absolute;
+            top: -1px; left: -1px; right: -1px; bottom: -1px;
+            background: linear-gradient(45deg, #00ff66, transparent, #262626);
+            z-index: -1;
+            border-radius: inherit;
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+        .glow-box:hover::before {
+            opacity: 1;
+        }
+
+        .lunnovate-card {
+            background: radial-gradient(800px 400px at 20% -10%, rgba(124,58,237,0.1), transparent 40%),
+                        radial-gradient(800px 400px at 120% 10%, rgba(110,231,255,0.08), transparent 40%),
+                        #121212;
+        }
+
+        .counter-increment {
+            animation: text-pop 0.3s ease-out;
+            color: #00ff66 !important;
+        }
+
+        @keyframes text-pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-base-900 antialiased selection:bg-neon-green selection:text-base-900 relative">
+
+    <!-- Subtle Background Grid -->
+    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 bg-base-900/80 backdrop-blur-md border-b border-base-700">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-2 group z-50">
+                <span class="text-neon-green font-mono text-xl font-bold">{ }</span>
+                <span class="font-display font-bold text-xl tracking-tight text-white group-hover:text-neon-green transition-colors">#MakeTechNative</span>
+            </a>
+            
+            <div class="hidden lg:flex items-center gap-8 font-mono text-sm">
+                <a href="#manifesto" class="text-gray-400 hover:text-neon-green transition-colors">01. Manifesto</a>
+                <a href="#telemetry" class="text-gray-400 hover:text-neon-green transition-colors">02. Data</a>
+                <a href="#tenets" class="text-gray-400 hover:text-neon-green transition-colors">03. Protocols</a>
+                <a href="#starter-kit" class="text-gray-400 hover:text-neon-green transition-colors">04. Starter Kit</a>
+                <a href="#join" class="px-5 py-2 border border-neon-green text-neon-green hover:bg-neon-green hover:text-base-900 font-bold transition-all">
+                    Join Network
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="lg:hidden text-neon-green text-2xl z-50 relative" id="mobile-menu-btn">
+                <i class="ph ph-list" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden absolute top-20 left-0 w-full bg-base-900 border-b border-base-700 shadow-2xl flex-col font-mono text-sm">
+            <a href="#manifesto" class="p-6 border-b border-base-800 text-gray-300 hover:text-neon-green hover:bg-base-800 transition-colors">01. Manifesto</a>
+            <a href="#telemetry" class="p-6 border-b border-base-800 text-gray-300 hover:text-neon-green hover:bg-base-800 transition-colors">02. Telemetry Data</a>
+            <a href="#tenets" class="p-6 border-b border-base-800 text-gray-300 hover:text-neon-green hover:bg-base-800 transition-colors">03. Core Protocols</a>
+            <a href="#starter-kit" class="p-6 border-b border-base-800 text-gray-300 hover:text-neon-green hover:bg-base-800 transition-colors">04. AI Starter Kit</a>
+            <a href="#join" class="p-6 text-neon-green font-bold bg-base-800 text-center">Join Network</a>
+        </div>
+    </nav>
+
+    <main class="relative z-10 pt-20">
+        <!-- HERO SECTION -->
+        <section class="min-h-[90vh] flex flex-col justify-center items-center text-center px-6 relative">
+            <div class="absolute w-96 h-96 bg-neon-green/10 rounded-full blur-[120px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none"></div>
+            
+            <div class="max-w-5xl mx-auto">
+                <div class="font-mono text-neon-green mb-6 tracking-widest text-sm uppercase flex items-center justify-center gap-3">
+                    <span class="w-8 h-px bg-neon-green"></span>
+                    System Override Initiated
+                    <span class="w-8 h-px bg-neon-green"></span>
+                </div>
+                
+                <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-extrabold text-white leading-[1.1] mb-8 tracking-tight">
+                    Africa's future <br class="hidden md:block">
+                    will not be <span class="text-gray-600 line-through decoration-neon-green decoration-4">imported</span>.<br>
+                    It will be <span class="highlight-text">engineered.</span>
+                </h1>
+                
+                <p class="font-mono text-lg md:text-xl text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed">
+                    > We are building technology for <span class="typewriter-text text-white">Lagos, Kano, Nairobi, Accra...</span><br>
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                    <a href="#manifesto" class="px-8 py-4 bg-white text-base-900 font-bold font-mono hover:bg-neon-green transition-colors flex items-center gap-2 w-full sm:w-auto justify-center">
+                        Read Manifesto <i class="ph-bold ph-arrow-down"></i>
+                    </a>
+                    <a href="#starter-kit" class="px-8 py-4 border border-base-700 text-white font-bold font-mono hover:border-neon-green hover:text-neon-green transition-colors w-full sm:w-auto justify-center flex items-center gap-2">
+                        <i class="ph-fill ph-book-open"></i> Get Starter Kit
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE MANIFESTO -->
+        <section id="manifesto" class="py-24 px-6 border-t border-base-700 bg-base-800/50">
+            <div class="max-w-4xl mx-auto">
+                <div class="flex items-center gap-4 mb-12">
+                    <span class="font-mono text-neon-green text-2xl font-bold">01</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">The Manifesto</h2>
+                    <div class="flex-grow h-px bg-base-700"></div>
+                </div>
+
+                <div class="space-y-8 text-xl sm:text-2xl text-gray-300 font-serif leading-relaxed">
+                    <p class="border-l-4 border-neon-green pl-6 text-white font-medium bg-base-800 py-2 pr-4 rounded-r-lg">
+                        I believe Africa does not lack intelligence. It lacks indigenous execution.
+                    </p>
+                    <p>
+                        My mission is to help redefine how young Africans approach technology — not just as users, but as builders. Not just as coders, but as system designers.
+                    </p>
+                    <p>
+                        We are taught to mimic Silicon Valley. To build apps for problems we don't have, using infrastructure we don't control. I want to see more founders building practical, scalable, revenue-generating solutions rooted in local friction.
+                    </p>
+                    <div class="font-mono text-neon-green text-lg bg-base-900 border border-base-700 p-6 rounded-lg">
+                        <span class="text-gray-500">//</span> Technology should not feel foreign.<br>
+                        <span class="text-gray-500">//</span> It should feel native.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TELEMETRY DATA (Live Stats) -->
+        <section id="telemetry" class="py-24 px-6 relative border-t border-base-700 bg-base-900 overflow-hidden">
+            <!-- Background glow -->
+            <div class="absolute right-0 top-0 w-96 h-96 bg-neon-green/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-12 border-b border-base-700 pb-4 gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-3 h-3 bg-neon-green rounded-full animate-pulse"></div>
+                        <h2 class="font-mono text-neon-green tracking-widest text-sm uppercase">> SYSTEM_TELEMETRY (LIVE_FEED)</h2>
+                    </div>
+                    <span class="font-mono text-xs text-gray-500 flex items-center gap-2">
+                        <i class="ph-bold ph-arrows-clockwise text-neon-green animate-spin"></i> SYNCING NODES...
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Stat 1: Members (Base 323) -->
+                    <div class="bg-base-800 border border-base-700 p-8 flex flex-col justify-between rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i class="ph-fill ph-users-three text-8xl text-white"></i>
+                        </div>
+                        <i class="ph ph-users text-3xl text-neon-green mb-6 relative z-10"></i>
+                        <div class="relative z-10">
+                            <!-- ID added here so we can target it with JS when form is submitted -->
+                            <h3 class="font-display text-5xl sm:text-6xl font-bold text-white mb-2" id="member-counter" data-target="323">0</h3>
+                            <p class="font-mono text-sm text-gray-400 uppercase tracking-wide">Network Nodes (Members)</p>
+                        </div>
+                    </div>
+
+                    <!-- Stat 2: Workshops -->
+                    <div class="bg-base-800 border border-base-700 p-8 flex flex-col justify-between rounded-xl relative overflow-hidden group">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i class="ph-fill ph-chalkboard-teacher text-8xl text-white"></i>
+                        </div>
+                        <i class="ph ph-chalkboard-teacher text-3xl text-neon-yellow mb-6 relative z-10"></i>
+                        <div class="relative z-10">
+                            <!-- Example: Base 2 workshops -->
+                            <h3 class="font-display text-5xl sm:text-6xl font-bold text-white mb-2 counter" data-target="2">0</h3>
+                            <p class="font-mono text-sm text-gray-400 uppercase tracking-wide">Workshops Deployed</p>
+                        </div>
+                    </div>
+
+                    <!-- Stat 3: Locations/Regions -->
+                    <div class="bg-base-800 border border-base-700 p-8 flex flex-col justify-between rounded-xl relative overflow-hidden group sm:col-span-2 lg:col-span-1">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                            <i class="ph-fill ph-map-pin text-8xl text-white"></i>
+                        </div>
+                        <i class="ph ph-map-pin text-3xl text-neon-cyan mb-6 relative z-10"></i>
+                        <div class="relative z-10">
+                            <h3 class="font-display text-5xl sm:text-6xl font-bold text-white mb-2 counter" data-target="2">0</h3>
+                            <p class="font-mono text-sm text-gray-400 uppercase tracking-wide">Active Hubs (Kano, Kaduna)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THE PROTOCOLS (Tenets) -->
+        <section id="tenets" class="py-24 px-6 relative border-t border-base-700">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center gap-4 mb-16">
+                    <span class="font-mono text-neon-green text-2xl font-bold">03</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">Core Protocols</h2>
+                    <div class="flex-grow h-px bg-base-700"></div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Protocol 1 -->
+                    <div class="glow-box bg-base-800 p-10 border border-base-700 flex flex-col group rounded-xl">
+                        <div class="text-neon-green font-mono text-sm mb-6 opacity-70 group-hover:opacity-100 transition-opacity">> EXE_01</div>
+                        <i class="ph-fill ph-globe-hemisphere-east text-4xl text-white mb-6"></i>
+                        <h3 class="font-display text-2xl font-bold text-white mb-4">Build for Local Realities</h3>
+                        <p class="text-gray-400 leading-relaxed font-sans">
+                            Design solutions that acknowledge and seamlessly integrate with our unique infrastructure, payment systems, and economic landscape.
+                        </p>
+                    </div>
+
+                    <!-- Protocol 2 -->
+                    <div class="glow-box bg-base-800 p-10 border border-base-700 flex flex-col group rounded-xl">
+                        <div class="text-neon-yellow font-mono text-sm mb-6 opacity-70 group-hover:opacity-100 transition-opacity">> EXE_02</div>
+                        <i class="ph-fill ph-users-three text-4xl text-white mb-6"></i>
+                        <h3 class="font-display text-2xl font-bold text-white mb-4">Design with Context</h3>
+                        <p class="text-gray-400 leading-relaxed font-sans">
+                            Understand user behaviors, internet limitations, and strengths to create intuitive, accessible, and highly relevant experiences.
+                        </p>
+                    </div>
+
+                    <!-- Protocol 3 -->
+                    <div class="glow-box bg-base-800 p-10 border border-base-700 flex flex-col group rounded-xl">
+                        <div class="text-neon-green font-mono text-sm mb-6 opacity-70 group-hover:opacity-100 transition-opacity">> EXE_03</div>
+                        <i class="ph-fill ph-shield-check text-4xl text-white mb-6"></i>
+                        <h3 class="font-display text-2xl font-bold text-white mb-4">Prioritize Ownership</h3>
+                        <p class="text-gray-400 leading-relaxed font-sans">
+                            Move away from simply copying global models. Focus on creating intellectual property, hardware, and digital systems we truly own.
+                        </p>
+                    </div>
+
+                    <!-- Protocol 4 -->
+                    <div class="glow-box bg-base-800 p-10 border border-base-700 flex flex-col group rounded-xl">
+                        <div class="text-neon-yellow font-mono text-sm mb-6 opacity-70 group-hover:opacity-100 transition-opacity">> EXE_04</div>
+                        <i class="ph-fill ph-wrench text-4xl text-white mb-6"></i>
+                        <h3 class="font-display text-2xl font-bold text-white mb-4">Solve Real Problems</h3>
+                        <p class="text-gray-400 leading-relaxed font-sans">
+                            Ignore the hype cycle of global tech buzzwords. Build practical, revenue-generating solutions that fix immediate, local friction.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI UNLEASHED STARTER KIT (Integrated Section) -->
+        <section id="starter-kit" class="py-24 px-6 border-t border-base-700 bg-base-900 relative">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex items-center gap-4 mb-6">
+                    <span class="font-mono text-neon-cyan text-2xl font-bold">04</span>
+                    <h2 class="font-display text-3xl sm:text-5xl font-bold text-white tracking-tight">AI UNLEASHED <span class="text-neon-cyan">—</span> Kit</h2>
+                    <div class="flex-grow h-px bg-base-700"></div>
+                </div>
+
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
+                    <p class="text-gray-400 font-sans max-w-2xl text-lg">
+                        Quick notes, beginner resources, and practice links to help you learn it, shape it, and own it. <br>
+                        <span class="text-neon-cyan font-mono text-sm mt-2 block">> Powered by Lunnovate • Student Series</span>
+                    </p>
+                </div>
+
+                <!-- Workshop Recap -->
+                <div class="mb-16">
+                    <div class="font-mono text-neon-cyan text-sm uppercase tracking-widest mb-6 border-b border-base-700 pb-2 inline-block">Workshop Recap</div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-base-800 border border-base-700 p-6 rounded-lg flex items-start gap-4">
+                            <span class="text-3xl leading-none">🤖</span>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">What is AI?</h4>
+                                <p class="text-sm text-gray-400">Machines that mimic human intelligence.</p>
+                            </div>
+                        </div>
+                        <div class="bg-base-800 border border-base-700 p-6 rounded-lg flex items-start gap-4">
+                            <span class="text-3xl leading-none">📚</span>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">How AI learns</h4>
+                                <p class="text-sm text-gray-400">Like a child learns from examples (data).</p>
+                            </div>
+                        </div>
+                        <div class="bg-base-800 border border-base-700 p-6 rounded-lg flex items-start gap-4">
+                            <span class="text-3xl leading-none">💬</span>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Prompting tips</h4>
+                                <p class="text-sm text-gray-400">Be clear, give examples, ask step-by-step.</p>
+                            </div>
+                        </div>
+                        <div class="bg-base-800 border border-base-700 p-6 rounded-lg flex items-start gap-4">
+                            <span class="text-3xl leading-none">🧩</span>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">Types of AI</h4>
+                                <p class="text-sm text-gray-400">Machine Learning, Deep Learning, Foundation Models.</p>
+                            </div>
+                        </div>
+                        <div class="bg-base-800 border border-base-700 p-6 rounded-lg flex items-start gap-4 lg:col-span-2">
+                            <span class="text-3xl leading-none">🚀</span>
+                            <div>
+                                <h4 class="font-bold text-white mb-1">AI & You</h4>
+                                <p class="text-sm text-gray-400">Careers and ethical responsibility. The future of AI in Africa will be built by YOU.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Learning Resources & Lunnovate Links -->
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <!-- Column 1: Resources -->
+                    <div>
+                        <div class="font-mono text-neon-cyan text-sm uppercase tracking-widest mb-6 border-b border-base-700 pb-2 inline-block">Learning Resources</div>
+                        <div class="space-y-4">
+                            <article class="lunnovate-card border border-base-700 p-6 rounded-xl transition-colors hover:border-neon-cyan group">
+                                <h3 class="font-bold text-lg text-white mb-2 group-hover:text-neon-cyan transition-colors">AI UNLEASHED – Playlist</h3>
+                                <p class="text-sm text-gray-400 mb-4">Watch the full series of beginner-friendly videos to get started with AI.</p>
+                                <a href="https://www.youtube.com/live/1HuD2ryeOLg?si=DNHCDAE4RKkJPpA3" target="_blank" rel="noopener" class="inline-block px-4 py-2 text-xs font-mono border border-base-700 text-gray-300 hover:text-base-900 hover:bg-neon-cyan transition-colors rounded">Open Link ↗</a>
+                            </article>
+                            
+                            <article class="lunnovate-card border border-base-700 p-6 rounded-xl transition-colors hover:border-neon-cyan group">
+                                <h3 class="font-bold text-lg text-white mb-2 group-hover:text-neon-cyan transition-colors">Free ML Course (freeCodeCamp)</h3>
+                                <p class="text-sm text-gray-400 mb-4">Hands-on introduction to machine learning concepts and practice.</p>
+                                <a href="https://share.google/Wk9abjdQgMOOr0pnV" target="_blank" rel="noopener" class="inline-block px-4 py-2 text-xs font-mono border border-base-700 text-gray-300 hover:text-base-900 hover:bg-neon-cyan transition-colors rounded">Open Link ↗</a>
+                            </article>
+
+                            <article class="lunnovate-card border border-base-700 p-6 rounded-xl transition-colors hover:border-neon-cyan group">
+                                <h3 class="font-bold text-lg text-white mb-2 group-hover:text-neon-cyan transition-colors">Google’s AI for Beginners</h3>
+                                <p class="text-sm text-gray-400 mb-4">Friendly tutorials from Google to start building with AI.</p>
+                                <a href="https://www.coursera.org/specializations/ai-essentials-google?utm_source=google&utm_medium=institutions&utm_campaign=sou--google__med--organicsearch__cam--gwgsite__con--null__ter--null" target="_blank" rel="noopener" class="inline-block px-4 py-2 text-xs font-mono border border-base-700 text-gray-300 hover:text-base-900 hover:bg-neon-cyan transition-colors rounded">Open Link ↗</a>
+                            </article>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Tools & Next Steps -->
+                    <div>
+                        <div class="font-mono text-neon-cyan text-sm uppercase tracking-widest mb-6 border-b border-base-700 pb-2 inline-block">Practice Tools</div>
+                        <div class="flex flex-wrap gap-3 mb-12">
+                            <a class="px-5 py-3 bg-base-800 border border-base-700 text-white font-mono text-sm hover:border-neon-green hover:text-neon-green transition-all rounded" href="https://chat.openai.com" target="_blank" rel="noopener">ChatGPT Free ↗</a>
+                            <a class="px-5 py-3 bg-base-800 border border-base-700 text-white font-mono text-sm hover:border-neon-green hover:text-neon-green transition-all rounded" href="https://gemini.google.com" target="_blank" rel="noopener">Google Gemini ↗</a>
+                            <a class="px-5 py-3 bg-base-800 border border-base-700 text-white font-mono text-sm hover:border-neon-green hover:text-neon-green transition-all rounded" href="https://www.meta.ai/" target="_blank" rel="noopener">META AI ↗</a>
+                        </div>
+
+                        <div class="font-mono text-neon-purple text-sm uppercase tracking-widest mb-6 border-b border-base-700 pb-2 inline-block">Next Steps with Lunnovate</div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="https://whatsapp.com/channel/0029Vb6tiTBC6ZvjV2e6Qu1p" target="_blank" rel="noopener" class="bg-base-800 border border-base-700 p-5 rounded-lg hover:border-neon-purple transition-colors block group">
+                                <i class="ph-fill ph-whatsapp-logo text-3xl text-neon-green mb-3 group-hover:text-neon-purple transition-colors"></i>
+                                <h4 class="font-bold text-white text-sm mb-1">WhatsApp Channel</h4>
+                                <p class="text-xs text-gray-500">Get updates & resources</p>
+                            </a>
+                            <a href="https://lunnovate.netlify.app/" target="_blank" rel="noopener" class="bg-base-800 border border-base-700 p-5 rounded-lg hover:border-neon-purple transition-colors block group">
+                                <i class="ph-fill ph-globe text-3xl text-gray-400 mb-3 group-hover:text-neon-purple transition-colors"></i>
+                                <h4 class="font-bold text-white text-sm mb-1">Website</h4>
+                                <p class="text-xs text-gray-500">Visit our home base</p>
+                            </a>
+                            <div class="bg-base-800 border border-base-700 p-5 rounded-lg col-span-2">
+                                <h4 class="font-bold text-white text-sm mb-3">Follow @Lunnovate</h4>
+                                <div class="flex gap-5">
+                                    <a href="https://www.youtube.com/channel/UCkgr9nGGSBMdNnmIpC-_5KA" target="_blank" class="text-gray-400 hover:text-white text-2xl transition-colors"><i class="ph-fill ph-youtube-logo"></i></a>
+                                    <a href="https://www.instagram.com/lunnovate_" target="_blank" class="text-gray-400 hover:text-white text-2xl transition-colors"><i class="ph-fill ph-instagram-logo"></i></a>
+                                    <a href="https://vm.tiktok.com/ZSHnNqN6jpnMK-uf7I2/" target="_blank" class="text-gray-400 hover:text-white text-2xl transition-colors"><i class="ph-fill ph-tiktok-logo"></i></a>
+                                    <a href="https://x.com/lunnovate?t=s8TzVorNwtiwuIG_ZPHdLw&s=08" target="_blank" class="text-gray-400 hover:text-white text-2xl transition-colors"><i class="ph-fill ph-x-logo"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JOIN THE MOVEMENT -->
+        <section id="join" class="py-24 px-6 border-t border-base-700 bg-base-900 relative overflow-hidden">
+            <!-- Decorative code background -->
+            <div class="absolute inset-0 opacity-[0.03] pointer-events-none font-mono text-xs text-neon-green overflow-hidden flex flex-wrap leading-none select-none z-0" style="word-break: break-all;">
+                def init_native_tech(): build(context="Africa", scale=True) if !ownership: reject() ... while(true){ solve_local_friction() } ...
+            </div>
+
+            <div class="max-w-3xl mx-auto text-center relative z-10">
+                <i class="ph-fill ph-terminal-window text-6xl text-neon-green mb-6"></i>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold text-white mb-4 tracking-tight">Ready to build?</h2>
+                <p class="text-gray-400 text-lg mb-10 font-sans max-w-xl mx-auto">
+                    Whether you're a developer, student, investor, or builder — if you believe Africa should build its own systems, join the network.
+                </p>
+                
+                <!-- 
+                  HOW TO RECEIVE EMAILS:
+                  1. Go to formspree.io and create a free account
+                  2. Create a form
+                  3. Replace the URL below with your unique Formspree endpoint (e.g. https://formspree.io/f/xbjvjrea)
+                -->
+                <form id="joinForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-6">
+                    <input type="email" name="email" required placeholder="Enter your email address..." class="flex-grow px-6 py-4 bg-base-800 border border-base-700 text-white font-mono placeholder-gray-600 focus:outline-none focus:border-neon-green transition-colors rounded">
+                    <button type="submit" class="px-8 py-4 bg-neon-green text-base-900 font-bold font-mono hover:bg-white transition-colors whitespace-nowrap rounded shadow-[0_0_15px_rgba(0,255,102,0.3)] hover:shadow-[0_0_25px_rgba(0,255,102,0.5)]">
+                        Initialize Join
+                    </button>
+                </form>
+
+                <!-- Success Message -->
+                <div id="joinSuccess" class="hidden font-mono text-neon-green text-sm mb-10 p-4 border border-neon-green/30 bg-neon-green/10 rounded max-w-lg mx-auto">
+                    > ACCESS GRANTED: Welcome to the network. Please check your email shortly.
+                </div>
+
+                <div class="flex items-center justify-center gap-6 mt-12">
+                    <a href="https://whatsapp.com/channel/0029Vb6tiTBC6ZvjV2e6Qu1p" target="_blank" class="text-gray-500 hover:text-neon-green transition-colors text-3xl" title="WhatsApp Channel"><i class="ph-fill ph-whatsapp-logo"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-3xl"><i class="ph-fill ph-twitter-logo"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors text-3xl"><i class="ph-fill ph-github-logo"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-base-900 border-t border-base-800 py-10 px-6 text-center z-10 relative">
+        <p class="font-mono text-sm text-gray-600">
+            &copy; 2026 #MakeTechNative. Initiated by <a href="#" class="text-gray-400 hover:text-neon-green underline decoration-base-700 underline-offset-4 transition-colors">Ibrahim Sanusi Bayero</a>.
+            <br><span class="inline-block mt-3 text-xs opacity-70">Starter Kit powered by <span class="text-neon-purple font-bold">Lunnovate</span>.</span>
+        </p>
+    </footer>
+
+    <!-- Sticky Bottom CTA -->
+    <div class="fixed right-4 bottom-4 z-50 flex gap-2 flex-col sm:flex-row shadow-2xl">
+        <button id="copyLinkBtn" class="px-4 py-3 bg-base-800 border border-base-700 text-white font-mono text-xs hover:border-neon-green transition-colors flex items-center justify-center gap-2 rounded">
+            <i class="ph-bold ph-link text-lg"></i> <span>Copy Link</span>
+        </button>
+        <a href="#starter-kit" class="px-4 py-3 bg-neon-green text-base-900 font-bold font-mono text-xs hover:bg-white transition-colors flex items-center justify-center gap-2 rounded">
+            <i class="ph-bold ph-arrow-up text-lg"></i> Top
+        </a>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // --- 1. Typewriter Effect ---
+        const words = ["Lagos.", "Kano.", "Nairobi.", "Accra.", "Cairo.", "Johannesburg."];
+        let i = 0;
+        let timer;
+        const target = document.querySelector('.typewriter-text');
+
+        function typingEffect() {
+            let word = words[i].split("");
+            var loopTyping = function() {
+                if (word.length > 0) {
+                    target.innerHTML += word.shift();
+                } else {
+                    setTimeout(deletingEffect, 2000);
+                    return false;
+                };
+                timer = setTimeout(loopTyping, 100);
+            };
+            loopTyping();
+        }
+
+        function deletingEffect() {
+            let word = words[i].split("");
+            var loopDeleting = function() {
+                if (word.length > 0) {
+                    word.pop();
+                    target.innerHTML = word.join("");
+                } else {
+                    if (words.length > (i + 1)) {
+                        i++;
+                    } else {
+                        i = 0;
+                    };
+                    typingEffect();
+                    return false;
+                };
+                timer = setTimeout(loopDeleting, 50);
+            };
+            loopDeleting();
+        }
+
+        if(target) typingEffect();
+
+        // --- 2. Mobile Menu Toggle ---
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            
+            if(mobileMenu.classList.contains('hidden')) {
+                menuIcon.classList.replace('ph-x', 'ph-list');
+            } else {
+                menuIcon.classList.replace('ph-list', 'ph-x');
+            }
+        });
+
+        // Close menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                menuIcon.classList.replace('ph-x', 'ph-list');
+            });
+        });
+
+        // --- 3. Copy Link ---
+        const copyBtn = document.getElementById('copyLinkBtn');
+        if(copyBtn) {
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(location.href);
+                    const span = copyBtn.querySelector('span');
+                    const original = span.textContent;
+                    span.textContent = 'Copied!';
+                    copyBtn.classList.replace('border-base-700', 'border-neon-green');
+                    copyBtn.classList.add('text-neon-green');
+                    
+                    setTimeout(() => {
+                        span.textContent = original;
+                        copyBtn.classList.replace('border-neon-green', 'border-base-700');
+                        copyBtn.classList.remove('text-neon-green');
+                    }, 2000);
+                } catch(err) {
+                    alert('Copy failed. You can copy from the address bar.');
+                }
+            });
+        }
+
+        // --- 4. Smart Telemetry Animation & Time-based Growth ---
+        // We set a launch date. Every day past this date adds a fractional member to simulate growth automatically.
+        const launchDate = new Date('2024-02-01').getTime();
+        const now = new Date().getTime();
+        const daysSinceLaunch = Math.max(0, (now - launchDate) / (1000 * 60 * 60 * 24));
+        
+        // Base number + 1 member every ~3 days
+        const simulatedMembers = Math.floor(323 + (daysSinceLaunch * 0.3)); 
+        
+        const memberElement = document.getElementById('member-counter');
+        if(memberElement) {
+            memberElement.setAttribute('data-target', simulatedMembers);
+        }
+
+        // Counter Animation Logic on Scroll
+        const counters = document.querySelectorAll('.counter, #member-counter');
+        const speed = 200; // lower = faster
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(animateCounters, 10);
+                } else {
+                    counter.innerText = target;
+                }
+            });
+        }
+
+        // Trigger animation when Telemetry section is visible
+        const telemetrySection = document.getElementById('telemetry');
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting) {
+                animateCounters();
+                observer.disconnect(); // run once
+            }
+        });
+        if(telemetrySection) observer.observe(telemetrySection);
+
+        // --- 5. Join Form Logic (Simulated Backend Feedback) ---
+        const joinForm = document.getElementById('joinForm');
+        const joinSuccess = document.getElementById('joinSuccess');
+        
+        if(joinForm) {
+            joinForm.addEventListener('submit', (e) => {
+                // IMPORTANT: If you want Formspree to actually process it, 
+                // DO NOT use e.preventDefault() here.
+                // However, because we want to update the UI instantly without redirecting away:
+                // For a real setup, you should use AJAX (fetch) to submit to Formspree silently.
+                e.preventDefault(); 
+                
+                const emailInput = joinForm.querySelector('input[type="email"]');
+                const userEmail = emailInput.value;
+
+                if(userEmail) {
+                    // 1. Send data to Formspree silently using fetch API
+                    fetch(joinForm.action, {
+                        method: 'POST',
+                        body: new FormData(joinForm),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    }).then(response => {
+                        // Success!
+                        joinForm.style.display = 'none';
+                        joinSuccess.style.display = 'block';
+                        
+                        // 2. Add dramatic +1 to the member counter
+                        if(memberElement) {
+                            let currentCount = parseInt(memberElement.innerText);
+                            memberElement.innerText = currentCount + 1;
+                            memberElement.classList.add('counter-increment');
+                            
+                            // Remove class after animation
+                            setTimeout(() => {
+                                memberElement.classList.remove('counter-increment');
+                            }, 500);
+                        }
+                    }).catch(error => {
+                        alert("System Error: Could not connect to network. Try again later.");
+                    });
+                }
+            });
+        }
+    </script>
+</body>
+</html>
