@@ -169,12 +169,9 @@
       gap: .6rem;
     }
 
-    .nav-logo .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--grad);
-      box-shadow: 0 0 12px rgba(32, 128, 129, .55);
+    .nav-logo-img {
+      width: 50px;
+      height: 50px;
     }
 
     .nav-center {
@@ -810,7 +807,7 @@
       border-color: var(--teal);
     }
 
-    /* device mock — studyspark */
+    /* device mock — Nahl */
     .device {
       position: relative;
       border-radius: 22px;
@@ -1505,6 +1502,42 @@
         font-size: 1.6rem;
       }
     }
+
+    .team-avatar {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      background: #f3efe8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-initials {
+      display: none;
+      width: 100%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      font-weight: 700;
+      color: #3a2f2a;
+      letter-spacing: -0.5px;
+    }
+
+    .team-avatar.no-image .team-initials {
+      display: flex;
+    }
   </style>
 </head>
 
@@ -1513,7 +1546,8 @@
 
   <!-- ═══ NAV ═══ -->
   <nav id="nav">
-    <a href="#hero" class="nav-logo wordmark"><span class="dot"></span>LUNNOVATE</a>
+    <a href="#hero" class="nav-logo wordmark"><img class="nav-logo-img" src="lunalo.png"
+        alt="Lunnovate Logo">LUNNOVATE</a>
     <div class="nav-center">
       <a href="#products">Products</a>
       <a href="#why">Mission</a>
@@ -1538,7 +1572,7 @@
     <div class="float-words" id="floatWords"></div>
     <div class="hero-inner">
       <div class="eyebrow">Building what's next</div>
-      <h1>AI built for the way <span class="grad">Africa</span> learns, works, and grows.</h1>
+      <h1>Building the way <span class="grad">Africa</span> learns, works, and grows.</h1>
       <p class="hero-sub">Lunnovate builds intelligent products designed around real problems — starting with education,
         productivity, and access to technology.</p>
       <div class="btn-row">
@@ -1604,10 +1638,10 @@
         <h2>Not services. Products.</h2>
       </div>
 
-      <!-- StudySpark -->
+      <!-- Nahl -->
       <div class="product-feature">
         <div class="pf-copy reveal">
-          <span class="pf-badge">StudySpark</span>
+          <span class="pf-badge">Nahl</span>
           <h3>The AI study companion built for students who want to study smarter.</h3>
           <p>Personalised study plans, spaced-repetition flashcards, and mock tests that adapt to how each student
             actually learns — with focus tools and streaks that keep momentum going.</p>
@@ -1618,12 +1652,13 @@
             <span class="chip">Focus</span>
             <span class="chip">XP &amp; Streaks</span>
           </div>
-          <a href="#" class="pf-link">Explore StudySpark <span class="arrow">→</span></a>
+          <a href="https://clutchub01.github.io/nahl.github.io/" class="pf-link">Explore Nahl <span
+              class="arrow">→</span></a>
         </div>
         <div class="pf-visual reveal reveal-delay">
           <div class="device">
             <div class="device-head">
-              <span class="app-name">STUDYSPARK</span>
+              <span class="app-name">Nahl</span>
               <span class="xp">+240 XP</span>
             </div>
             <div class="device-bar"><span></span></div>
@@ -1664,13 +1699,13 @@
         <div class="eyebrow" style="margin-top:2rem">More we're building</div>
         <div class="more-row">
           <div class="more-card"><span class="tag">Exploring</span>
-            <h4>EcoBridge</h4>
+            <h4>NomaScout</h4>
           </div>
           <div class="more-card"><span class="tag">Exploring</span>
-            <h4>Digital Shield</h4>
+            <h4>EventHub</h4>
           </div>
           <div class="more-card"><span class="tag">Exploring</span>
-            <h4>Future Labs</h4>
+            <h4>Lunnovate Labs</h4>
           </div>
         </div>
       </div>
@@ -1732,11 +1767,11 @@
         </div>
         <div class="t-item reveal reveal-delay">
           <div class="t-year">2025</div>
-          <h4>StudySpark</h4>
+          <h4>EchoBridge</h4>
         </div>
         <div class="t-item reveal reveal-delay-2">
           <div class="t-year">2026</div>
-          <h4>EchoBridge</h4>
+          <h4>Nahl</h4>
         </div>
         <div class="t-item reveal">
           <div class="t-year">2026</div>
@@ -1750,7 +1785,8 @@
       <div style="text-align:center">
         <a href="#" class="journey-link reveal">Follow the journey <span class="arrow">→</span></a>
         <div class="social-row reveal" style="justify-content:center">
-          <a href="#">Instagram</a><a href="#">LinkedIn</a><a href="#">X</a>
+          <a href="https://www.instagram.com/lunnovate.ai/">Instagram</a><a
+            href="https://www.linkedin.com/company/lunnovate">LinkedIn</a><a href="https://twitter.com/lunnovate">X</a>
         </div>
       </div>
     </div>
@@ -1759,31 +1795,18 @@
   <!-- ═══ TEAM ═══ -->
   <section id="team" class="section-pad">
     <div class="wrap">
+
       <div class="section-head reveal">
         <div class="eyebrow">Who's behind it</div>
-        <h2>Built by people who refuse to accept<br>"that's just how it works."</h2>
+
+        <h2>
+          Built by people who refuse to accept<br>
+          "that's just how it works."
+        </h2>
       </div>
-      <!-- Placeholder team card — replace name, role and quote with the real founding team -->
-      <div class="team-grid">
-        <div class="team-card reveal">
-          <div class="team-avatar">LN</div>
-          <h4>Founder Name</h4>
-          <div class="team-role">Founder / Builder</div>
-          <p class="team-quote">"Technology should solve problems people actually have."</p>
-        </div>
-        <div class="team-card reveal reveal-delay">
-          <div class="team-avatar">LN</div>
-          <h4>Team Member</h4>
-          <div class="team-role">Role / Builder</div>
-          <p class="team-quote">"Add a real quote that reflects how this person thinks about the work."</p>
-        </div>
-        <div class="team-card reveal reveal-delay-2">
-          <div class="team-avatar">LN</div>
-          <h4>Team Member</h4>
-          <div class="team-role">Role / Builder</div>
-          <p class="team-quote">"Add a real quote that reflects how this person thinks about the work."</p>
-        </div>
-      </div>
+
+      <div class="team-grid" id="teamGrid"></div>
+
     </div>
   </section>
 
@@ -1808,9 +1831,9 @@
           <div class="footer-line">AI · Education · Innovation</div>
         </div>
         <div class="footer-social">
-          <a href="#">Instagram</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">GitHub</a>
+          <a href="https://www.instagram.com/lunnovate.ai/">Instagram</a>
+          <a href="https://www.linkedin.com/company/lunnovate">LinkedIn</a>
+          <a href="https://github.com/lunnovate">GitHub</a>
         </div>
       </div>
       <div class="divider" style="margin-bottom:1.5rem"></div>
@@ -1875,6 +1898,146 @@
       bar.style.height = h + '%';
       bar.style.animationDelay = (Math.random() * 1.4) + 's';
       wave.appendChild(bar);
+    }
+
+    // ═══════════════════════════════════════
+    // TEAM DATA
+    // Easy to update — add/edit team members here
+    // ═══════════════════════════════════════
+
+    const teamMembers = [
+      {
+        name: "Ibrahim Sanusi Bayero",
+        role: "Founder",
+        image: null,
+        initials: "ISB",
+        quote: "The best technology is the kind that makes what once felt impossible feel inevitable."
+      },
+      {
+        name: "Muhammad Aminu",
+        role: "Co-Founder",
+        image: null,
+        initials: "MA",
+        quote: "We are not building for the sake of building. We are building because there are problems worth solving."
+      },
+      {
+        name: "Adamu Sulaiman Muhammed",
+        role: "Lead Software Engineer",
+        image: null,
+        initials: "ASM",
+        quote: "Good software should disappear into the experience and simply make things work."
+      },
+      {
+        name: "Muhammad Muktar",
+        role: "Marketing Lead",
+        image: null,
+        initials: "MM",
+        quote: "People connect with ideas when they can see themselves in the story behind them."
+      },
+      {
+        name: "Safwan Abdullahi",
+        role: "Finance Specialist",
+        image: null,
+        initials: "SA",
+        quote: "A great idea becomes sustainable when ambition is matched with discipline."
+      },
+      {
+        name: "Adeneye Abdulganiyu",
+        role: "Community Manager",
+        image: null,
+        initials: "AA",
+        quote: "A product is only as strong as the people who believe in it and the community that grows around it."
+      },
+      {
+        name: "Ridwan Bello",
+        role: "UI/UX Designer",
+        image: null,
+        initials: "RB",
+        quote: "Design is not about making things look good. It is about making them feel obvious."
+      },
+      {
+        name: "Nathan Yakubu",
+        role: "Content Lead",
+        image: null,
+        initials: "NY",
+        quote: "Every product has a story. Good content makes people care enough to listen."
+      },
+      {
+        name: "Abubakar Sadiq Gadanya",
+        role: "Full Stack Developer",
+        image: null,
+        initials: "ASG",
+        quote: "The goal is not just to write code, but to turn ideas into things people can actually use."
+      },
+      {
+        name: "Aliyu Ilu",
+        role: "Business Development Lead",
+        image: null,
+        initials: "AI",
+        quote: "Building something valuable means finding the people who need it and creating a reason for them to believe."
+      },
+      {
+        name: "Abubakar Sadiq Bilya",
+        role: "QA Tester",
+        image: null,
+        initials: "ASB",
+        quote: "If it can break, we should find out before our users do."
+      }
+    ];
+
+    // ═══════════════════════════════════════
+    // RENDER TEAM
+    // ═══════════════════════════════════════
+
+    const teamGrid = document.getElementById("teamGrid");
+
+    if (teamGrid) {
+      teamGrid.innerHTML = teamMembers.map((member, index) => {
+        const delayClass =
+          index % 3 === 1
+            ? "reveal-delay"
+            : index % 3 === 2
+              ? "reveal-delay-2"
+              : "";
+
+        return `
+      <div class="team-card reveal ${delayClass}">
+
+        <div class="team-avatar">
+  ${member.image
+            ? `
+        <img
+          src="${member.image}"
+          alt="${member.name}"
+          loading="lazy"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+      `
+            : ""
+          }
+
+  <span
+    class="team-initials"
+    style="display: ${member.image ? "none" : "flex"}"
+  >
+    ${member.initials}
+  </span>
+</div>
+
+        <h4>${member.name}</h4>
+
+        <div class="team-role">
+          ${member.role}
+        </div>
+
+        <p class="team-quote">
+          "${member.quote}"
+        </p>
+
+      </div>
+    `;
+      }).join("");
+      teamGrid.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
     }
 
     /* ── HERO CONSTELLATION CANVAS ── */
